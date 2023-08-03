@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "RPRrAnL5YaLsqyD5EKiY7lqU6yLYYZjIHhZzT2pD7orKin++ZoljQIwFB0y6jqAJXkNPNY0Q4S/2U/HYNIVLsg==",
+  "success": true,
+  "projectFilePath": "/home/skajland/Downloads/Code/C#/Labirynt 3 Edytor/Labirynt 3 Edytor.csproj",
+  "expectedPackageFiles": [
+    "/home/skajland/.nuget/packages/raylib-cs/4.5.0.2/raylib-cs.4.5.0.2.nupkg.sha512",
+    "/home/skajland/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
