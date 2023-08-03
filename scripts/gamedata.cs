@@ -202,14 +202,14 @@ internal static class UseFull
             }
         }
         // boundaries without camera borders
-        Raylib.DrawLineEx(screenBoundaries1, screenBoundaries2, 5, Color.BLUE);
-        Raylib.DrawLineEx(screenBoundaries2, screenBoundaries4, 5, Color.BLUE);
-        Raylib.DrawLineEx(screenBoundaries3, screenBoundaries4, 5, Color.BLUE);
-        Raylib.DrawLineEx(screenBoundaries3, screenBoundaries1, 5, Color.BLUE);
+        Raylib.DrawLineEx(screenBoundaries1, screenBoundaries2, 3, Color.BLUE);
+        Raylib.DrawLineEx(screenBoundaries2, screenBoundaries4, 3, Color.BLUE);
+        Raylib.DrawLineEx(screenBoundaries3, screenBoundaries4, 3, Color.BLUE);
+        Raylib.DrawLineEx(screenBoundaries3, screenBoundaries1, 3, Color.BLUE);
         // boundaries with camera borders
-        Raylib.DrawLineEx(boundaries1, boundaries2, 5, Color.RED);
-        Raylib.DrawLineEx(boundaries2, boundaries4, 5, Color.RED);
-        Raylib.DrawLineEx(boundaries3, boundaries4, 5, Color.RED);
-        Raylib.DrawLineEx(boundaries3, boundaries1, 5, Color.RED);
+        Raylib.DrawLineEx(boundaries1, boundaries2, 4, Color.RED);
+        Raylib.DrawLineEx(boundaries2, boundaries4, 4, Color.RED);
+        Raylib.DrawLineEx(boundaries3, boundaries4, 4, Color.RED);
+        Raylib.DrawLineEx(boundaries3, boundaries1, 4, Color.RED);
     }
 }
