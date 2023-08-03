@@ -122,9 +122,10 @@ internal static class UseFull
 {
     public static bool MenuRectCollision;
 
-    static UseFull()
+    public static void Start()
     {
-        Program.UpdateScripts += MenuCollision;
+        Program.UpdateScripts += Update;
+        Program.RenderScripts += Render;
     }
     public static Button CreateButton(Texture2D img, Vector2 pos, params Action[] onClick)
     {
@@ -138,12 +139,51 @@ internal static class UseFull
             new Color(130, 130, 130, 70), new Color(130, 130, 130, 100),
             new Color(160, 160, 160, 150), onClick);
     }
-    
+
+    private static void Update()
+    {
+        MenuCollision();
+    }
+    private static void Render()
+    {
+        var points = PlayerBoundaries();
+        Raylib.DrawLineEx(points[0], points[1], 5, Color.RED);
+        Raylib.DrawLineEx(points[1], points[3], 5, Color.RED);
+        Raylib.DrawLineEx(points[2], points[3], 5, Color.RED);
+        Raylib.DrawLineEx(points[2], points[0], 5, Color.RED);
+    }
     private static void MenuCollision()
     {
         MenuRectCollision = Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), MenuBlock.MenuRect) || 
                             Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), MenuGameData.MenuRect) && MenuGameData.MenuRectEnabled ||
                             Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), MenuTop.TopRect) ||
                             Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), MiniMenuTop.Rect) && MiniMenuTop.Enabled;
+    }
+
+    public static Vector2[] PlayerBoundaries()
+    {
+        Vector2 wall1 = new Vector2();
+        Vector2 wall2 = new Vector2();
+        Vector2 wall3 = new Vector2();
+        Vector2 wall4 = new Vector2();
+        foreach (var row in BlockSpawn.Board)
+        {
+            foreach (var itemlist in row)
+            {
+                foreach (var item in itemlist)
+                {
+                    if (item != 3) continue;
+                    wall1 = new Vector2(SaveLoadSystem.GameData.CameraBorders[0], SaveLoadSystem.GameData.CameraBorders[1]) + Camera.CameraOffset; // Top-Left
+                    wall2 = new Vector2(Raylib.GetScreenWidth() - SaveLoadSystem.GameData.CameraBorders[0],
+                        SaveLoadSystem.GameData.CameraBorders[1]) + Camera.CameraOffset; // Top-Right
+                    wall3 = new Vector2(SaveLoadSystem.GameData.CameraBorders[2],
+                        Raylib.GetScreenHeight() - SaveLoadSystem.GameData.CameraBorders[2]) + Camera.CameraOffset; // Bottom-Left
+                    wall4 = new Vector2(Raylib.GetScreenWidth() - SaveLoadSystem.GameData.CameraBorders[0],
+                        Raylib.GetScreenHeight() - SaveLoadSystem.GameData.CameraBorders[1]) + Camera.CameraOffset; // Bottom-Right
+                    return new []{wall1, wall2, wall3, wall4};
+                }
+            }
+        }
+        return new []{wall1, wall2, wall3, wall4};
     }
 }

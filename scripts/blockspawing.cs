@@ -43,7 +43,8 @@ namespace Labirynt_3_Edytor.scripts{
                     if (CurrentBlock.Pos.X - Camera.CameraOffset.X < 0) break;
                     if (CurrentBlock.Pos.X - Camera.CameraOffset.X > Board[0].Count * 86 - GridSize) break;
                     if (CurrentBlock.Pos.Y - Camera.CameraOffset.Y < 0) break;
-                    if (CurrentBlock.Pos.Y - Camera.CameraOffset.Y > Board.Count * 86 - GridSize) break;               
+                    if (CurrentBlock.Pos.Y - Camera.CameraOffset.Y > Board.Count * 86 - GridSize) break;        
+                    
                     for (int k = 0; k < Board[i][j].Count; k++)
                     {
                         if (Board[i][j][0] == 3) Board[i][j][0] = 0;

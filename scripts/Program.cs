@@ -25,6 +25,7 @@ internal static class Program
         Raylib.SetTargetFPS(90);
         SaveLoadSystem.GenerateBoard();
         Camera.Start();
+        UseFull.Start();
         MenuBlock.Start();
         MenuGameData.Start();
         BlockSpawn.Start();
