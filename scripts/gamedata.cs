@@ -102,8 +102,8 @@ public static class SaveLoadSystem
     }
     public static void GenerateBoard()
     {
-        const int width = 86;
-        const int height = 86;
+        const int width = 64;
+        const int height = 64;
             
         BlockSpawn.Board.Clear();
             

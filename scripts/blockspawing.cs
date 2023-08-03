@@ -38,12 +38,26 @@ namespace Labirynt_3_Edytor.scripts{
             {
                 for (int j = 0; j < Board[i].Count; j++)
                 {
+                    if (CurrentBlock.Index != 3) break;
+                    // see if placeblock is in the borders that the player wont go away(it's kinda a ugly process but what are you gonna do)
+                    if (CurrentBlock.Pos.X - Camera.CameraOffset.X < 0) break;
+                    if (CurrentBlock.Pos.X - Camera.CameraOffset.X > Board[0].Count * 86 - GridSize) break;
+                    if (CurrentBlock.Pos.Y - Camera.CameraOffset.Y < 0) break;
+                    if (CurrentBlock.Pos.Y - Camera.CameraOffset.Y > Board.Count * 86 - GridSize) break;               
+                    for (int k = 0; k < Board[i][j].Count; k++)
+                    {
+                        if (Board[i][j][0] == 3) Board[i][j][0] = 0;
+                        if (Board[i][j][k] == 3) Board[i][j].Remove(3);
+                    }
+                }
+            }
+
+            for (int i = 0; i < Board.Count; i++)
+            {
+                for (int j = 0; j < Board[i].Count; j++)
+                {
                     Vector2 pos = new Vector2(86 * j, 86 * i);
                     if (pos != CurrentBlock.Pos - Camera.CameraOffset) continue;
-                    if (CurrentBlock.Index == 3)
-                    {
-                        
-                    }
                     for (int k = 0; k < Board[i][j].Count; k++)
                     {
                         if(Board[i][j][k] == 0) continue;
