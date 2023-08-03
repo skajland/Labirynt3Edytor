@@ -10,6 +10,7 @@ internal static class Program
     public static bool Running = true;
     public static void Main()
     {
+        //Hello world
         Start();
         while (Running)
         {
