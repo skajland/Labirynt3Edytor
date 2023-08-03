@@ -160,26 +160,28 @@ internal static class UseFull
                             Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), MiniMenuTop.Rect) && MiniMenuTop.Enabled;
     }
 
-    public static Vector2[] PlayerBoundaries()
+    private static Vector2[] PlayerBoundaries()
     {
         Vector2 wall1 = new Vector2();
         Vector2 wall2 = new Vector2();
         Vector2 wall3 = new Vector2();
         Vector2 wall4 = new Vector2();
-        foreach (var row in BlockSpawn.Board)
+        for (int i = 0; i < BlockSpawn.Board.Count; i++)
         {
-            foreach (var itemlist in row)
+            for (int j = 0; j < BlockSpawn.Board[i].Count; j++)
             {
-                foreach (var item in itemlist)
+                foreach (var item in BlockSpawn.Board[i][j])
                 {
                     if (item != 3) continue;
-                    wall1 = new Vector2(SaveLoadSystem.GameData.CameraBorders[0], SaveLoadSystem.GameData.CameraBorders[1]) + Camera.CameraOffset; // Top-Left
-                    wall2 = new Vector2(Raylib.GetScreenWidth() - SaveLoadSystem.GameData.CameraBorders[0],
-                        SaveLoadSystem.GameData.CameraBorders[1]) + Camera.CameraOffset; // Top-Right
-                    wall3 = new Vector2(SaveLoadSystem.GameData.CameraBorders[2],
-                        Raylib.GetScreenHeight() - SaveLoadSystem.GameData.CameraBorders[2]) + Camera.CameraOffset; // Bottom-Left
-                    wall4 = new Vector2(Raylib.GetScreenWidth() - SaveLoadSystem.GameData.CameraBorders[0],
-                        Raylib.GetScreenHeight() - SaveLoadSystem.GameData.CameraBorders[1]) + Camera.CameraOffset; // Bottom-Right
+                    var playerWidth = Convert.ToInt32(j * 86);
+                    var playerHeight = Convert.ToInt32(i * 86);
+                    wall1 = new Vector2(SaveLoadSystem.GameData.CameraBorders[0] + playerWidth, SaveLoadSystem.GameData.CameraBorders[1] + playerHeight) + Camera.CameraOffset; // Top-Left
+                    wall2 = new Vector2(Raylib.GetScreenWidth() - SaveLoadSystem.GameData.CameraBorders[2] + playerWidth,
+                        SaveLoadSystem.GameData.CameraBorders[1] + playerHeight) + Camera.CameraOffset; // Top-Right
+                    wall3 = new Vector2(SaveLoadSystem.GameData.CameraBorders[0] + playerWidth,
+                        Raylib.GetScreenHeight() - SaveLoadSystem.GameData.CameraBorders[3] + playerHeight) + Camera.CameraOffset; // Bottom-Left
+                    wall4 = new Vector2(Raylib.GetScreenWidth() - SaveLoadSystem.GameData.CameraBorders[2] + playerWidth,
+                        Raylib.GetScreenHeight() - SaveLoadSystem.GameData.CameraBorders[3] + playerHeight) + Camera.CameraOffset; // Bottom-Right
                     return new []{wall1, wall2, wall3, wall4};
                 }
             }

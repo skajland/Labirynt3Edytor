@@ -105,12 +105,12 @@ public static class MenuGameData
         TextBoxesCameraOffset.Add(new TextBox(new Rectangle(textBoxPos.X + 100, textBoxPos.Y + 30, textBoxSize.X, textBoxSize.Y),
             SaveLoadSystem.GameData.CameraOffsetPos[1], 64, 3, Color.BEIGE, Color.BROWN, true));
         
+        TextBoxesCameraBoundaries.Add(new TextBox(new Rectangle(textBoxPos.X - 260, textBoxPos.Y - 200, textBoxSize.X, textBoxSize.Y),
+            SaveLoadSystem.GameData.CameraBorders[2], 64, 3, Color.BEIGE, Color.BROWN, true));
         TextBoxesCameraBoundaries.Add(new TextBox(new Rectangle(textBoxPos.X - 90, textBoxPos.Y - 200, textBoxSize.X, textBoxSize.Y),
             SaveLoadSystem.GameData.CameraBorders[0], 64, 3, Color.BEIGE, Color.BROWN, true));
         TextBoxesCameraBoundaries.Add(new TextBox(new Rectangle(textBoxPos.X + 90, textBoxPos.Y - 200, textBoxSize.X, textBoxSize.Y),
             SaveLoadSystem.GameData.CameraBorders[1], 64, 3, Color.BEIGE, Color.BROWN, true));
-        TextBoxesCameraBoundaries.Add(new TextBox(new Rectangle(textBoxPos.X - 260, textBoxPos.Y - 200, textBoxSize.X, textBoxSize.Y),
-            SaveLoadSystem.GameData.CameraBorders[2], 64, 3, Color.BEIGE, Color.BROWN, true));
         TextBoxesCameraBoundaries.Add(new TextBox(new Rectangle(textBoxPos.X + 260, textBoxPos.Y - 200, textBoxSize.X, textBoxSize.Y),
             SaveLoadSystem.GameData.CameraBorders[3], 64, 3, Color.BEIGE, Color.BROWN, true));
         
