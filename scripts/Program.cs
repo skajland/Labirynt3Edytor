@@ -2,7 +2,7 @@
 using System.Numerics;
 
 namespace Labirynt_3_Edytor.scripts;
-//I'm making this game at the beginning of 14 years.
+//I'm making this game editor at the beginning of 14 years.
 internal static class Program
 {
     public static Action UpdateScripts = () => {};
