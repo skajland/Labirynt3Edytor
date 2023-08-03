@@ -2,7 +2,7 @@
 using System.Numerics;
 
 namespace Labirynt_3_Edytor.scripts;
-
+//I'm making this at the beginning of 14 years.
 internal static class Program
 {
     public static Action UpdateScripts = () => {};

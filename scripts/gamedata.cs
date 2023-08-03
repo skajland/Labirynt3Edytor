@@ -146,11 +146,7 @@ internal static class UseFull
     }
     private static void Render()
     {
-        var points = PlayerBoundaries();
-        Raylib.DrawLineEx(points[0], points[1], 5, Color.RED);
-        Raylib.DrawLineEx(points[1], points[3], 5, Color.RED);
-        Raylib.DrawLineEx(points[2], points[3], 5, Color.RED);
-        Raylib.DrawLineEx(points[2], points[0], 5, Color.RED);
+        RenderBoundaries();
     }
     private static void MenuCollision()
     {
@@ -160,12 +156,16 @@ internal static class UseFull
                             Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), MiniMenuTop.Rect) && MiniMenuTop.Enabled;
     }
 
-    private static Vector2[] PlayerBoundaries()
+    private static void RenderBoundaries()
     {
-        Vector2 wall1 = new Vector2();
-        Vector2 wall2 = new Vector2();
-        Vector2 wall3 = new Vector2();
-        Vector2 wall4 = new Vector2();
+        var boundaries1 = new Vector2();
+        var boundaries2 = new Vector2();
+        var boundaries3 = new Vector2();
+        var boundaries4 = new Vector2();
+        var screenBoundaries1 = new Vector2();
+        var screenBoundaries2 = new Vector2();
+        var screenBoundaries3 = new Vector2();
+        var screenBoundaries4 = new Vector2(); 
         for (int i = 0; i < BlockSpawn.Board.Count; i++)
         {
             for (int j = 0; j < BlockSpawn.Board[i].Count; j++)
@@ -173,19 +173,43 @@ internal static class UseFull
                 foreach (var item in BlockSpawn.Board[i][j])
                 {
                     if (item != 3) continue;
-                    var playerWidth = Convert.ToInt32(j * 86 / 2);
-                    var playerHeight = Convert.ToInt32(i * 86 / 2);
-                    wall1 = new Vector2(playerWidth - SaveLoadSystem.GameData.CameraBorders[0], playerHeight - SaveLoadSystem.GameData.CameraBorders[1]) + Camera.CameraOffset; // Top-Left
-                    wall2 = new Vector2(playerWidth - Raylib.GetScreenWidth() - SaveLoadSystem.GameData.CameraBorders[2],
-                        playerHeight - SaveLoadSystem.GameData.CameraBorders[1]) + Camera.CameraOffset; // Top-Right
-                    wall3 = new Vector2(playerWidth - SaveLoadSystem.GameData.CameraBorders[0],
-                        playerHeight - Raylib.GetScreenHeight() - SaveLoadSystem.GameData.CameraBorders[3]) + Camera.CameraOffset; // Bottom-Left
-                    wall4 = new Vector2( playerWidth - Raylib.GetScreenWidth() - SaveLoadSystem.GameData.CameraBorders[2],
-                        playerHeight - Raylib.GetScreenHeight() - SaveLoadSystem.GameData.CameraBorders[3]) + Camera.CameraOffset; // Bottom-Right
-                    return new []{wall1, wall2, wall3, wall4};
+                    const int playerSizeMiddle = 43;
+                    var playerWidth = Convert.ToInt32(j * 86) + playerSizeMiddle;
+                    var playerHeight = Convert.ToInt32(i * 86) + playerSizeMiddle;
+                    var screenSizeMiddle = new Vector2(Convert.ToInt32(Raylib.GetScreenWidth() / 2),Convert.ToInt32(Raylib.GetScreenHeight() / 2));
+                    var screenOffset = new Vector2(SaveLoadSystem.GameData.CameraOffsetPos[0],SaveLoadSystem.GameData.CameraOffsetPos[1]);
+                    //Complex Math?!? I LOVE COMPLEX MATH!!!
+                    boundaries1 = new Vector2(SaveLoadSystem.GameData.CameraBorders[0] + playerWidth - screenSizeMiddle.X,
+                        SaveLoadSystem.GameData.CameraBorders[1] + playerHeight - screenSizeMiddle.Y) + Camera.CameraOffset + screenOffset; // Top-Left
+                    
+                    boundaries2 = new Vector2(screenSizeMiddle.X - SaveLoadSystem.GameData.CameraBorders[2] + playerWidth,
+                        SaveLoadSystem.GameData.CameraBorders[1] + playerHeight - screenSizeMiddle.Y) + Camera.CameraOffset + screenOffset; // Top-Right
+                    
+                    boundaries3 = new Vector2(SaveLoadSystem.GameData.CameraBorders[0] + playerWidth - screenSizeMiddle.X,
+                        Raylib.GetScreenHeight() - SaveLoadSystem.GameData.CameraBorders[3] + playerHeight - screenSizeMiddle.Y) + Camera.CameraOffset + screenOffset; // Bottom-Left
+                    
+                    boundaries4 = new Vector2(Raylib.GetScreenWidth() - SaveLoadSystem.GameData.CameraBorders[2] + playerWidth - screenSizeMiddle.X,
+                        Raylib.GetScreenHeight() - SaveLoadSystem.GameData.CameraBorders[3] + playerHeight - screenSizeMiddle.Y) + Camera.CameraOffset + screenOffset; // Bottom-Right
+                    
+                    screenBoundaries1 = new Vector2(playerWidth - screenSizeMiddle.X,playerHeight - screenSizeMiddle.Y) + Camera.CameraOffset + screenOffset; // Top-Left
+                    
+                    screenBoundaries2 = new Vector2(screenSizeMiddle.X + playerWidth,playerHeight - screenSizeMiddle.Y) + Camera.CameraOffset + screenOffset; // Top-Right
+                    
+                    screenBoundaries3 = new Vector2(playerWidth - screenSizeMiddle.X,Raylib.GetScreenHeight() + playerHeight - screenSizeMiddle.Y) + Camera.CameraOffset + screenOffset; // Bottom-Left
+                    
+                    screenBoundaries4 = new Vector2(Raylib.GetScreenWidth() + playerWidth - screenSizeMiddle.X,Raylib.GetScreenHeight() + playerHeight - screenSizeMiddle.Y) + Camera.CameraOffset + screenOffset; // Bottom-Right   
                 }
             }
         }
-        return new []{wall1, wall2, wall3, wall4};
+        // boundaries without camera borders
+        Raylib.DrawLineEx(screenBoundaries1, screenBoundaries2, 5, Color.BLUE);
+        Raylib.DrawLineEx(screenBoundaries2, screenBoundaries4, 5, Color.BLUE);
+        Raylib.DrawLineEx(screenBoundaries3, screenBoundaries4, 5, Color.BLUE);
+        Raylib.DrawLineEx(screenBoundaries3, screenBoundaries1, 5, Color.BLUE);
+        // boundaries with camera borders
+        Raylib.DrawLineEx(boundaries1, boundaries2, 5, Color.RED);
+        Raylib.DrawLineEx(boundaries2, boundaries4, 5, Color.RED);
+        Raylib.DrawLineEx(boundaries3, boundaries4, 5, Color.RED);
+        Raylib.DrawLineEx(boundaries3, boundaries1, 5, Color.RED);
     }
 }
