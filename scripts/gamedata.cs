@@ -173,15 +173,15 @@ internal static class UseFull
                 foreach (var item in BlockSpawn.Board[i][j])
                 {
                     if (item != 3) continue;
-                    var playerWidth = Convert.ToInt32(j * 86);
-                    var playerHeight = Convert.ToInt32(i * 86);
-                    wall1 = new Vector2(SaveLoadSystem.GameData.CameraBorders[0] + playerWidth, SaveLoadSystem.GameData.CameraBorders[1] + playerHeight) + Camera.CameraOffset; // Top-Left
-                    wall2 = new Vector2(Raylib.GetScreenWidth() - SaveLoadSystem.GameData.CameraBorders[2] + playerWidth,
-                        SaveLoadSystem.GameData.CameraBorders[1] + playerHeight) + Camera.CameraOffset; // Top-Right
-                    wall3 = new Vector2(SaveLoadSystem.GameData.CameraBorders[0] + playerWidth,
-                        Raylib.GetScreenHeight() - SaveLoadSystem.GameData.CameraBorders[3] + playerHeight) + Camera.CameraOffset; // Bottom-Left
-                    wall4 = new Vector2(Raylib.GetScreenWidth() - SaveLoadSystem.GameData.CameraBorders[2] + playerWidth,
-                        Raylib.GetScreenHeight() - SaveLoadSystem.GameData.CameraBorders[3] + playerHeight) + Camera.CameraOffset; // Bottom-Right
+                    var playerWidth = Convert.ToInt32(j * 86 / 2);
+                    var playerHeight = Convert.ToInt32(i * 86 / 2);
+                    wall1 = new Vector2(playerWidth - SaveLoadSystem.GameData.CameraBorders[0], playerHeight - SaveLoadSystem.GameData.CameraBorders[1]) + Camera.CameraOffset; // Top-Left
+                    wall2 = new Vector2(playerWidth - Raylib.GetScreenWidth() - SaveLoadSystem.GameData.CameraBorders[2],
+                        playerHeight - SaveLoadSystem.GameData.CameraBorders[1]) + Camera.CameraOffset; // Top-Right
+                    wall3 = new Vector2(playerWidth - SaveLoadSystem.GameData.CameraBorders[0],
+                        playerHeight - Raylib.GetScreenHeight() - SaveLoadSystem.GameData.CameraBorders[3]) + Camera.CameraOffset; // Bottom-Left
+                    wall4 = new Vector2( playerWidth - Raylib.GetScreenWidth() - SaveLoadSystem.GameData.CameraBorders[2],
+                        playerHeight - Raylib.GetScreenHeight() - SaveLoadSystem.GameData.CameraBorders[3]) + Camera.CameraOffset; // Bottom-Right
                     return new []{wall1, wall2, wall3, wall4};
                 }
             }
