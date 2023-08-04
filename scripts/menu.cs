@@ -100,6 +100,8 @@ public static class MenuGameData
     {
         Program.UpdateScripts += Update;
         Program.RenderScripts += Render;
+        Texture2D addButtonTexture = Raylib.LoadTexture("res/AddButton.png");
+        Texture2D minusButtonTexture = Raylib.LoadTexture("res/MinusButton.png");
         Vector2 textBoxSize =  new Vector2(150, 100);
         Vector2 textBoxPos = new Vector2(Convert.ToInt32(Raylib.GetScreenWidth() / 2) - textBoxSize.X / 2,
             Convert.ToInt32(Raylib.GetScreenHeight() / 2) - textBoxSize.Y / 2);
@@ -110,10 +112,10 @@ public static class MenuGameData
             TextBoxesCameraOffset.Add(new TextBox(new Rectangle(buttonPos.X, buttonPos.Y, textBoxSize.X, textBoxSize.Y),
                 SaveLoadSystem.GameData.CameraOffsetPos[index], 64, 3, Color.BEIGE, Color.BROWN, true, false));
             
-            var addButton = UseFull.CreateButton(MenuBlock.PreloadedTextures[0], buttonPos with {Y = buttonPos.Y + textBoxSize.Y},
-                () => TextBoxesCameraOffset[index].NumberPressed += 86);
-            var removeButton = UseFull.CreateButton(MenuBlock.PreloadedTextures[0], new Vector2(buttonPos.X + textBoxSize.X - MenuBlock.PreloadedTextures[0].width,
-                    buttonPos.Y + textBoxSize.Y),() => TextBoxesCameraOffset[index].NumberPressed -= 86);
+            var addButton = UseFull.CreateButton(minusButtonTexture, buttonPos with {Y = buttonPos.Y + textBoxSize.Y},
+                () => TextBoxesCameraOffset[index].NumberPressed -= 86);
+            var removeButton = UseFull.CreateButton(addButtonTexture, new Vector2(buttonPos.X + textBoxSize.X - addButtonTexture.width,
+                    buttonPos.Y + textBoxSize.Y),() => TextBoxesCameraOffset[index].NumberPressed += 86);
             AddButtons.Add(addButton);
             RemoveButtons.Add(removeButton);
         }
@@ -122,11 +124,11 @@ public static class MenuGameData
         {
             var index = i + 2;
             var buttonPos = new Vector2(textBoxPos.X + 170 * i + 85, textBoxPos.Y - 200 + textBoxSize.Y);
-            var addButton = UseFull.CreateButton(MenuBlock.PreloadedTextures[0], buttonPos,
-                () => TextBoxesCameraBoundaries[index].NumberPressed += 86);
-            var removeButton = UseFull.CreateButton(MenuBlock.PreloadedTextures[0],
-                buttonPos with {X = buttonPos.X + textBoxSize.X - MenuBlock.PreloadedTextures[0].width},
+            var addButton = UseFull.CreateButton(minusButtonTexture, buttonPos,
                 () => TextBoxesCameraBoundaries[index].NumberPressed -= 86);
+            var removeButton = UseFull.CreateButton(addButtonTexture,
+                buttonPos with {X = buttonPos.X + textBoxSize.X - addButtonTexture.width},
+                () => TextBoxesCameraBoundaries[index].NumberPressed += 86);
             
             TextBoxesCameraBoundaries.Add(new TextBox(new Rectangle(textBoxPos.X + 170 * i + 85, textBoxPos.Y - 200, textBoxSize.X, textBoxSize.Y),
                 SaveLoadSystem.GameData.CameraBorders[index], 64, 3, Color.BEIGE, Color.BROWN, true, false));
