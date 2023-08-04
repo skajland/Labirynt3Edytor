@@ -78,6 +78,7 @@ namespace Labirynt_3_Edytor.scripts{
         public static void Start()
         {
             Program.UpdateScripts += Update;
+            Program.RenderScripts += Render;
         }
         private static void Update(){
             if (!UseFull.MenuRectCollision)
@@ -97,6 +98,16 @@ namespace Labirynt_3_Edytor.scripts{
             SpawnBlock();
             }
 
+        private static void Render()
+        {
+            var currentBlockMiddleX = (86 - BlockSpawn.CurrentBlock.Texture.width) / 2;
+            var currentBlockMiddleY = (86 - BlockSpawn.CurrentBlock.Texture.height) / 2;
+            Raylib.DrawTextureV(CurrentBlock.Texture,
+                CurrentBlock.Pos + new Vector2(currentBlockMiddleX, currentBlockMiddleY), Color.WHITE);
+            var rect = new Rectangle(CurrentBlock.Pos.X + currentBlockMiddleX,CurrentBlock.Pos.Y + currentBlockMiddleY,
+                CurrentBlock.Texture.width, CurrentBlock.Texture.height);
+            Raylib.DrawRectangleRec(rect, new Color(150, 150, 150, 70));
+        }
         public static void ChangeIndex(params int[] index)
         {
             _currentIndexBlock = index[0];

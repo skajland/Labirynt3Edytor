@@ -26,9 +26,9 @@ internal static class Program
         SaveLoadSystem.GenerateBoard();
         Camera.Start();
         UseFull.Start();
+        BlockSpawn.Start();
         MenuBlock.Start();
         MenuGameData.Start();
-        BlockSpawn.Start();
         MenuTop.Start();
         MiniMenuTop.Start();
     }
@@ -47,10 +47,6 @@ internal static class Program
         var color = SaveLoadSystem.GameData.BackgroundColor;
         Raylib.ClearBackground(new Color(color[0], color[1], color[2], 255));
         RenderingBlocks();
-        var currentBlockMiddleX = (86 - BlockSpawn.CurrentBlock.Texture.width) / 2;
-        var currentBlockMiddleY = (86 - BlockSpawn.CurrentBlock.Texture.height) / 2;
-        Raylib.DrawTextureV(BlockSpawn.CurrentBlock.Texture,
-            BlockSpawn.CurrentBlock.Pos + new Vector2(currentBlockMiddleX, currentBlockMiddleY), Color.WHITE);
         // top line
         Raylib.DrawLineEx(Camera.CameraOffset, Camera.CameraOffset with { X = BlockSpawn.Board[0].Count * 86 + Camera.CameraOffset.X }, 5, Color.DARKGREEN);
         // left line
