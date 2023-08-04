@@ -127,15 +127,17 @@ internal static class UseFull
         Program.UpdateScripts += Update;
         Program.RenderScripts += Render;
     }
+
     public static Button CreateButton(Texture2D img, Vector2 pos, params Action[] onClick)
     {
-        return new Button(img, pos, 
+        return new Button(img, pos,
             new Color(130, 130, 130, 70), new Color(130, 130, 130, 100),
             new Color(160, 160, 160, 150), onClick);
     }
+
     public static Button CreateButton(string text, Color fontColor, int fontSize, Vector2 pos, params Action[] onClick)
     {
-        return new Button(text, fontColor, pos, fontSize, 
+        return new Button(text, fontColor, pos, fontSize,
             new Color(130, 130, 130, 70), new Color(130, 130, 130, 100),
             new Color(160, 160, 160, 150), onClick);
     }
@@ -144,16 +146,20 @@ internal static class UseFull
     {
         MenuCollision();
     }
+
     private static void Render()
     {
         RenderBoundaries();
     }
+
     private static void MenuCollision()
     {
-        MenuRectCollision = Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), MenuBlock.MenuRect) || 
-                            Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), MenuGameData.MenuRect) && MenuGameData.MenuRectEnabled ||
+        MenuRectCollision = Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), MenuBlock.MenuRect) ||
+                            Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), MenuGameData.MenuRect) &&
+                            MenuGameData.MenuRectEnabled ||
                             Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), MenuTop.TopRect) ||
-                            Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), MiniMenuTop.Rect) && MiniMenuTop.Enabled;
+                            Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), MiniMenuTop.Rect) &&
+                            MiniMenuTop.Enabled;
     }
 
     private static void RenderBoundaries()
@@ -165,7 +171,7 @@ internal static class UseFull
         var screenBoundaries1 = new Vector2();
         var screenBoundaries2 = new Vector2();
         var screenBoundaries3 = new Vector2();
-        var screenBoundaries4 = new Vector2(); 
+        var screenBoundaries4 = new Vector2();
         for (int i = 0; i < BlockSpawn.Board.Count; i++)
         {
             for (int j = 0; j < BlockSpawn.Board[i].Count; j++)
@@ -176,31 +182,53 @@ internal static class UseFull
                     const int playerSizeMiddle = 43;
                     var playerWidth = Convert.ToInt32(j * 86) + playerSizeMiddle;
                     var playerHeight = Convert.ToInt32(i * 86) + playerSizeMiddle;
-                    var screenSizeMiddle = new Vector2(Convert.ToInt32(Raylib.GetScreenWidth() / 2),Convert.ToInt32(Raylib.GetScreenHeight() / 2));
-                    var screenOffset = new Vector2(SaveLoadSystem.GameData.CameraOffsetPos[0],SaveLoadSystem.GameData.CameraOffsetPos[1]);
+                    var screenSizeMiddle = new Vector2(Convert.ToInt32(Raylib.GetScreenWidth() / 2),
+                        Convert.ToInt32(Raylib.GetScreenHeight() / 2));
+                    var screenOffset = new Vector2(SaveLoadSystem.GameData.CameraOffsetPos[0],
+                        SaveLoadSystem.GameData.CameraOffsetPos[1]);
                     //Complex Math?!? I LOVE COMPLEX MATH!!!
-                    boundaries1 = new Vector2(SaveLoadSystem.GameData.CameraBorders[0] + playerWidth - screenSizeMiddle.X,
-                        SaveLoadSystem.GameData.CameraBorders[1] + playerHeight - screenSizeMiddle.Y) + Camera.CameraOffset + screenOffset; // Top-Left
-                    
-                    boundaries2 = new Vector2(screenSizeMiddle.X - SaveLoadSystem.GameData.CameraBorders[2] + playerWidth,
-                        SaveLoadSystem.GameData.CameraBorders[1] + playerHeight - screenSizeMiddle.Y) + Camera.CameraOffset + screenOffset; // Top-Right
-                    
-                    boundaries3 = new Vector2(SaveLoadSystem.GameData.CameraBorders[0] + playerWidth - screenSizeMiddle.X,
-                        Raylib.GetScreenHeight() - SaveLoadSystem.GameData.CameraBorders[3] + playerHeight - screenSizeMiddle.Y) + Camera.CameraOffset + screenOffset; // Bottom-Left
-                    
-                    boundaries4 = new Vector2(Raylib.GetScreenWidth() - SaveLoadSystem.GameData.CameraBorders[2] + playerWidth - screenSizeMiddle.X,
-                        Raylib.GetScreenHeight() - SaveLoadSystem.GameData.CameraBorders[3] + playerHeight - screenSizeMiddle.Y) + Camera.CameraOffset + screenOffset; // Bottom-Right
-                    
-                    screenBoundaries1 = new Vector2(playerWidth - screenSizeMiddle.X,playerHeight - screenSizeMiddle.Y) + Camera.CameraOffset + screenOffset; // Top-Left
-                    
-                    screenBoundaries2 = new Vector2(screenSizeMiddle.X + playerWidth,playerHeight - screenSizeMiddle.Y) + Camera.CameraOffset + screenOffset; // Top-Right
-                    
-                    screenBoundaries3 = new Vector2(playerWidth - screenSizeMiddle.X,Raylib.GetScreenHeight() + playerHeight - screenSizeMiddle.Y) + Camera.CameraOffset + screenOffset; // Bottom-Left
-                    
-                    screenBoundaries4 = new Vector2(Raylib.GetScreenWidth() + playerWidth - screenSizeMiddle.X,Raylib.GetScreenHeight() + playerHeight - screenSizeMiddle.Y) + Camera.CameraOffset + screenOffset; // Bottom-Right   
+                    boundaries1 = new Vector2(
+                                      SaveLoadSystem.GameData.CameraBorders[0] + playerWidth - screenSizeMiddle.X,
+                                      SaveLoadSystem.GameData.CameraBorders[1] + playerHeight - screenSizeMiddle.Y) +
+                                  Camera.CameraOffset + screenOffset; // Top-Left
+
+                    boundaries2 = new Vector2(
+                                      screenSizeMiddle.X - SaveLoadSystem.GameData.CameraBorders[2] + playerWidth,
+                                      SaveLoadSystem.GameData.CameraBorders[1] + playerHeight - screenSizeMiddle.Y) +
+                                  Camera.CameraOffset + screenOffset; // Top-Right
+
+                    boundaries3 = new Vector2(
+                        SaveLoadSystem.GameData.CameraBorders[0] + playerWidth - screenSizeMiddle.X,
+                        Raylib.GetScreenHeight() - SaveLoadSystem.GameData.CameraBorders[3] + playerHeight -
+                        screenSizeMiddle.Y) + Camera.CameraOffset + screenOffset; // Bottom-Left
+
+                    boundaries4 = new Vector2(
+                        Raylib.GetScreenWidth() - SaveLoadSystem.GameData.CameraBorders[2] + playerWidth -
+                        screenSizeMiddle.X,
+                        Raylib.GetScreenHeight() - SaveLoadSystem.GameData.CameraBorders[3] + playerHeight -
+                        screenSizeMiddle.Y) + Camera.CameraOffset + screenOffset; // Bottom-Right
+
+                    screenBoundaries1 =
+                        new Vector2(playerWidth - screenSizeMiddle.X, playerHeight - screenSizeMiddle.Y) +
+                        Camera.CameraOffset + screenOffset; // Top-Left
+
+                    screenBoundaries2 =
+                        new Vector2(screenSizeMiddle.X + playerWidth, playerHeight - screenSizeMiddle.Y) +
+                        Camera.CameraOffset + screenOffset; // Top-Right
+
+                    screenBoundaries3 =
+                        new Vector2(playerWidth - screenSizeMiddle.X,
+                            Raylib.GetScreenHeight() + playerHeight - screenSizeMiddle.Y) + Camera.CameraOffset +
+                        screenOffset; // Bottom-Left
+
+                    screenBoundaries4 =
+                        new Vector2(Raylib.GetScreenWidth() + playerWidth - screenSizeMiddle.X,
+                            Raylib.GetScreenHeight() + playerHeight - screenSizeMiddle.Y) + Camera.CameraOffset +
+                        screenOffset; // Bottom-Right   
                 }
             }
         }
+
         // boundaries without camera borders
         Raylib.DrawLineEx(screenBoundaries1, screenBoundaries2, 3, Color.BLUE);
         Raylib.DrawLineEx(screenBoundaries2, screenBoundaries4, 3, Color.BLUE);
@@ -212,4 +240,35 @@ internal static class UseFull
         Raylib.DrawLineEx(boundaries3, boundaries4, 4, Color.RED);
         Raylib.DrawLineEx(boundaries3, boundaries1, 4, Color.RED);
     }
-}
+
+    public static void DeleteItems()
+    {
+        for (int i = 0; i < BlockSpawn.Board.Count; i++)
+        {
+            for (int j = 0; j < BlockSpawn.Board[i].Count; j++)
+            {
+                Vector2 pos = new Vector2(86 * j, 86 * i);
+                if (pos != BlockSpawn.CurrentBlock.Pos - Camera.CameraOffset) continue;
+                BlockSpawn.Board[i][j] = new List<int>{0};
+            }
+        }
+    }
+
+    public static void TpToPlayer()
+    {
+        for (int i = 0; i < BlockSpawn.Board.Count; i++)
+        {
+            for (int j = 0; j < BlockSpawn.Board[i].Count; j++)
+            {
+                for (int k = 0; k < BlockSpawn.Board[i][j].Count; k++)
+                {
+                    if(BlockSpawn.Board[i][j][k] != 3) continue;
+                    var screenSize = new Vector2(Convert.ToInt32(Raylib.GetScreenWidth() / 2),Convert.ToInt32(Raylib.GetScreenHeight() / 2));
+                    var gridSizeMiddle = 43;
+                    var pos = new Vector2(j * 86 - screenSize.X + gridSizeMiddle, i * 86 - screenSize.Y + gridSizeMiddle); 
+                    Camera.CameraOffset = -pos;
+                }
+            }
+        }          
+    }
+}    

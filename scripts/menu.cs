@@ -98,7 +98,6 @@ public static class MenuGameData
         Vector2 textBoxSize =  new Vector2(150, 100);
         Vector2 textBoxPos = new Vector2(Convert.ToInt32(Raylib.GetScreenWidth() / 2) - textBoxSize.X / 2,
             Convert.ToInt32(Raylib.GetScreenHeight() / 2) - textBoxSize.Y / 2);
-        
         TextBoxesCameraOffset.Add(new TextBox(new Rectangle(textBoxPos.X - 100, textBoxPos.Y + 30, textBoxSize.X, textBoxSize.Y),
             SaveLoadSystem.GameData.CameraOffsetPos[0], 64, 3, Color.BEIGE, Color.BROWN, true));
         
@@ -123,7 +122,6 @@ public static class MenuGameData
         Vector2 size = new Vector2(750, 850);
         Vector2 menuPos = new Vector2(Convert.ToInt32(Raylib.GetScreenWidth() / 2) - size.X / 2,
             Convert.ToInt32(Raylib.GetScreenHeight()) - size.Y);
-
         MenuRect = new Rectangle(menuPos.X, menuPos.Y, size.X, size.Y);
     }
     private static void Render()
@@ -151,10 +149,12 @@ internal static class MenuTop
     public static readonly Rectangle TopRect = new Rectangle(0, 0, Raylib.GetScreenWidth(), 86);
     private static readonly List<Button> QuickButtons = new List<Button>();
     private static Button? _menuButton;
+    private static Button? _tpToPlayer;
     private static void Update()
     {
         foreach (var button in QuickButtons) button.Collision();
         _menuButton?.Collision();
+        _tpToPlayer?.Collision();
     }
 
     public static void Start()
@@ -165,6 +165,12 @@ internal static class MenuTop
         Raylib.ImageResizeNN(ref menuImg, 86, 86);
         _menuButton = UseFull.CreateButton(Raylib.LoadTextureFromImage(menuImg), new Vector2(0, 0),
             () => MiniMenuTop.Enabled = !MiniMenuTop.Enabled);
+        
+        Image buttonImage = Raylib.LoadImage("res/TpPlayer.png");
+        Raylib.ImageResizeNN(ref buttonImage, 64, 64);
+        Texture2D buttonTexture = Raylib.LoadTextureFromImage(buttonImage);
+        var pos = new Vector2(Convert.ToInt32(Raylib.GetScreenWidth() - 300), TopRect.height / 2 - Convert.ToInt32(buttonTexture.height / 2));
+        _tpToPlayer = UseFull.CreateButton(buttonTexture, pos, UseFull.TpToPlayer);    
     }
     public static void OnButtonClick()
     {
@@ -197,6 +203,7 @@ internal static class MenuTop
             button.Render();
         }
         _menuButton?.Render();
+        _tpToPlayer?.Render();
     }
 }
 

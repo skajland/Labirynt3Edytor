@@ -38,6 +38,7 @@ internal static class Program
         UpdateScripts.Invoke();
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_J)) SaveLoadSystem.SaveGame();
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_L)) SaveLoadSystem.LoadGame();
+        if (Raylib.IsKeyPressed(KeyboardKey.KEY_X)) UseFull.DeleteItems();
         if (Raylib.WindowShouldClose()) Running = false;
     }
     private static void Render()
