@@ -90,16 +90,18 @@ public class TextBox
 {
     public int NumberPressed;
     private readonly Rectangle _rect;
+    private readonly bool _canType;
     private readonly int _fontSize;
     private readonly int _maxLength;
     private readonly bool _minusNumber;
     private readonly Color _fontColor;
     private readonly Color _boxColor;
-    public TextBox(Rectangle rect, int startingNumber, int fontsize, int maxlength, Color fontcolor, Color boxColor, bool minusNumber)
+    public TextBox(Rectangle rect, int startingNumber, int fontsize, int maxlength, Color fontcolor, Color boxColor, bool minusNumber, bool canType)
     {
         _rect = rect;
         NumberPressed = startingNumber;
         _minusNumber = minusNumber;
+        _canType = canType;
         _fontSize = fontsize;
         _maxLength = maxlength;
         _fontSize = fontsize;
@@ -113,6 +115,7 @@ public class TextBox
     }
     private void IsNumberKeyPressed(ref int number)
     {
+        if (!_canType) return;
         if (!Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), _rect)) return;
         var textBoxNumber = number.ToString();
         var length = textBoxNumber.Contains("-") ? 1 : 0;

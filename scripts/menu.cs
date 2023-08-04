@@ -72,6 +72,8 @@ public static class MenuGameData
     public static readonly List<TextBox> TextBoxesCameraBoundaries = new List<TextBox>();
     public static readonly List<TextBox> TextBoxesCameraOffset = new List<TextBox>();
     public static readonly List<TextBox> TextBoxesBackgroundColor = new List<TextBox>();
+    private static readonly List<Button> AddButtons = new List<Button>();
+    private static readonly List<Button> RemoveButtons = new List<Button>();
     private static void Update()
     {
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_T)) MenuRectEnabled = !MenuRectEnabled;
@@ -79,6 +81,9 @@ public static class MenuGameData
         foreach (var textBox in TextBoxesCameraBoundaries) textBox.Update();
         foreach (var textBox in TextBoxesCameraOffset) textBox.Update();
         foreach (var textBox in TextBoxesBackgroundColor) textBox.Update();
+        
+        foreach (var addButton in AddButtons) addButton.Collision();
+        foreach (var removeButton in RemoveButtons) removeButton.Collision();
         
         SaveLoadSystem.GameData.CameraOffsetPos = new []{TextBoxesCameraOffset[0].NumberPressed, TextBoxesCameraOffset[1].NumberPressed};
         SaveLoadSystem.GameData.CameraBorders = new []{TextBoxesCameraBoundaries[0].NumberPressed, TextBoxesCameraBoundaries[1].NumberPressed, 
@@ -98,27 +103,40 @@ public static class MenuGameData
         Vector2 textBoxSize =  new Vector2(150, 100);
         Vector2 textBoxPos = new Vector2(Convert.ToInt32(Raylib.GetScreenWidth() / 2) - textBoxSize.X / 2,
             Convert.ToInt32(Raylib.GetScreenHeight() / 2) - textBoxSize.Y / 2);
-        TextBoxesCameraOffset.Add(new TextBox(new Rectangle(textBoxPos.X - 100, textBoxPos.Y + 30, textBoxSize.X, textBoxSize.Y),
-            SaveLoadSystem.GameData.CameraOffsetPos[0], 64, 3, Color.BEIGE, Color.BROWN, true));
-        
-        TextBoxesCameraOffset.Add(new TextBox(new Rectangle(textBoxPos.X + 100, textBoxPos.Y + 30, textBoxSize.X, textBoxSize.Y),
-            SaveLoadSystem.GameData.CameraOffsetPos[1], 64, 3, Color.BEIGE, Color.BROWN, true));
-        
-        TextBoxesCameraBoundaries.Add(new TextBox(new Rectangle(textBoxPos.X - 260, textBoxPos.Y - 200, textBoxSize.X, textBoxSize.Y),
-            SaveLoadSystem.GameData.CameraBorders[2], 64, 3, Color.BEIGE, Color.BROWN, true));
-        TextBoxesCameraBoundaries.Add(new TextBox(new Rectangle(textBoxPos.X - 90, textBoxPos.Y - 200, textBoxSize.X, textBoxSize.Y),
-            SaveLoadSystem.GameData.CameraBorders[0], 64, 3, Color.BEIGE, Color.BROWN, true));
-        TextBoxesCameraBoundaries.Add(new TextBox(new Rectangle(textBoxPos.X + 90, textBoxPos.Y - 200, textBoxSize.X, textBoxSize.Y),
-            SaveLoadSystem.GameData.CameraBorders[1], 64, 3, Color.BEIGE, Color.BROWN, true));
-        TextBoxesCameraBoundaries.Add(new TextBox(new Rectangle(textBoxPos.X + 260, textBoxPos.Y - 200, textBoxSize.X, textBoxSize.Y),
-            SaveLoadSystem.GameData.CameraBorders[3], 64, 3, Color.BEIGE, Color.BROWN, true));
-        
-        TextBoxesBackgroundColor.Add(new TextBox(new Rectangle(textBoxPos.X - 200, textBoxPos.Y + 250, textBoxSize.X, textBoxSize.Y),
-            SaveLoadSystem.GameData.BackgroundColor[0], 64, 3, Color.BEIGE, Color.BROWN, false));
-        TextBoxesBackgroundColor.Add(new TextBox(new Rectangle(textBoxPos.X, textBoxPos.Y + 250, textBoxSize.X, textBoxSize.Y),
-            SaveLoadSystem.GameData.BackgroundColor[1], 64, 3, Color.BEIGE, Color.BROWN, false));  
-        TextBoxesBackgroundColor.Add(new TextBox(new Rectangle(textBoxPos.X + 200, textBoxPos.Y + 250, textBoxSize.X, textBoxSize.Y),
-            SaveLoadSystem.GameData.BackgroundColor[2], 64, 3, Color.BEIGE, Color.BROWN, false));
+        for (int i = -1; i < 1; i++)
+        {
+            var index = i + 1;
+            var buttonPos = new Vector2(textBoxPos.X + 200 * i + 100, textBoxPos.Y + 30);
+            TextBoxesCameraOffset.Add(new TextBox(new Rectangle(buttonPos.X, buttonPos.Y, textBoxSize.X, textBoxSize.Y),
+                SaveLoadSystem.GameData.CameraOffsetPos[index], 64, 3, Color.BEIGE, Color.BROWN, true, false));
+            
+            var addButton = UseFull.CreateButton(MenuBlock.PreloadedTextures[0], buttonPos with {Y = buttonPos.Y + textBoxSize.Y},
+                () => TextBoxesCameraOffset[index].NumberPressed += 86);
+            var removeButton = UseFull.CreateButton(MenuBlock.PreloadedTextures[0], new Vector2(buttonPos.X + textBoxSize.X - MenuBlock.PreloadedTextures[0].width,
+                    buttonPos.Y + textBoxSize.Y),() => TextBoxesCameraOffset[index].NumberPressed -= 86);
+            AddButtons.Add(addButton);
+            RemoveButtons.Add(removeButton);
+        }
+
+        for (int i = -2; i < 2; i++)
+        {
+            var index = i + 2;
+            var buttonPos = new Vector2(textBoxPos.X + 170 * i + 85, textBoxPos.Y - 200 + textBoxSize.Y);
+            var addButton = UseFull.CreateButton(MenuBlock.PreloadedTextures[0], buttonPos,
+                () => TextBoxesCameraBoundaries[index].NumberPressed += 86);
+            var removeButton = UseFull.CreateButton(MenuBlock.PreloadedTextures[0],
+                buttonPos with {X = buttonPos.X + textBoxSize.X - MenuBlock.PreloadedTextures[0].width},
+                () => TextBoxesCameraBoundaries[index].NumberPressed -= 86);
+            
+            TextBoxesCameraBoundaries.Add(new TextBox(new Rectangle(textBoxPos.X + 170 * i + 85, textBoxPos.Y - 200, textBoxSize.X, textBoxSize.Y),
+                SaveLoadSystem.GameData.CameraBorders[index], 64, 3, Color.BEIGE, Color.BROWN, true, false));
+            AddButtons.Add(addButton);
+            RemoveButtons.Add(removeButton);
+        }
+        for (int i = -1; i < 2; i++){
+            TextBoxesBackgroundColor.Add(new TextBox(new Rectangle(textBoxPos.X + 200 * i, textBoxPos.Y + 250, textBoxSize.X, textBoxSize.Y),
+                SaveLoadSystem.GameData.BackgroundColor[i + 1], 64, 3, Color.BEIGE, Color.BROWN, false, true));
+        }
         Vector2 size = new Vector2(750, 850);
         Vector2 menuPos = new Vector2(Convert.ToInt32(Raylib.GetScreenWidth() / 2) - size.X / 2,
             Convert.ToInt32(Raylib.GetScreenHeight()) - size.Y);
@@ -129,11 +147,12 @@ public static class MenuGameData
         if (!MenuRectEnabled) return;
         Raylib.DrawRectangleRec(MenuRect, Color.DARKGRAY);
         foreach (var textBox in TextBoxesCameraBoundaries) textBox.Render();
-
         foreach (var textBox in TextBoxesCameraOffset) textBox.Render();
-
         foreach (var textBox in TextBoxesBackgroundColor) textBox.Render();
-
+        
+        foreach (var addButton in AddButtons) addButton.Render();
+        foreach (var removeButton in RemoveButtons) removeButton.Render();
+        
         const int fontSize = 48;
         Raylib.DrawText("Camera Offset", Raylib.GetScreenWidth() / 2 - Raylib.MeasureText("Camera Offset", fontSize) / 2,
             Raylib.GetScreenHeight() / 2 - 100, fontSize, Color.ORANGE);
