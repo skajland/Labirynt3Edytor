@@ -10,8 +10,9 @@ namespace Labirynt_3_Edytor.scripts
         public readonly string Filter;
         public Texture2D Texture;
         public readonly int Index;
-        public Block(Image img, Vector2 size, int index, int layer, string filter)
+        public Block(Image img, Vector2 size, int index, int layer, string filter, int price)
         {
+            if(BlockSpawn.Coins < price) return;
             Index = index;
             Layer = layer;
             Filter = filter;
