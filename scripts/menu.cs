@@ -165,10 +165,10 @@ public static class MenuGameData
         Raylib.DrawText("Camera Offset", Raylib.GetScreenWidth() / 2 - Raylib.MeasureText("Camera Offset", fontSize) / 2,
             Raylib.GetScreenHeight() / 2 - 180, fontSize, Color.ORANGE);
         Raylib.DrawText("Background Color", Raylib.GetScreenWidth() / 2 - Raylib.MeasureText("Background Color", fontSize) / 2,
-            Raylib.GetScreenHeight() / 2 + 20, fontSize, Color.ORANGE);
+            Raylib.GetScreenHeight() / 2 + 35, fontSize, Color.ORANGE);
         Raylib.DrawText("Camera Boundaries", Raylib.GetScreenWidth() / 2 - Raylib.MeasureText("Camera Boundaries", fontSize) / 2,
             Raylib.GetScreenHeight() / 2 - 420, fontSize, Color.ORANGE);
-        Raylib.DrawText("Enemy Speed", Raylib.GetScreenWidth() / 2 - Raylib.MeasureText("Enemy Speed", fontSize) / 2,
+        Raylib.DrawText("Difficulty Modifier", Raylib.GetScreenWidth() / 2 - Raylib.MeasureText("Difficulty Modifier", fontSize) / 2,
             Raylib.GetScreenHeight() / 2 + 230, fontSize, Color.ORANGE);
     }
 }

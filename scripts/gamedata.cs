@@ -9,7 +9,7 @@ public class GameDataFile
     public int[] CameraOffsetPos = new int[]{0, 0};
     public int[] BackgroundColor = new int[] {105, 200, 75};
     public int[] CameraBorders = new int[] { 258, 258, 258, 258 };
-    public int[] EnemySpeed = new int[] { 9, 10, 13 };
+    public int[] EnemySpeed = new int[] { 90, 100, 135 };
 }
 
 public static class SaveLoadSystem
