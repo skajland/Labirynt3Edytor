@@ -9,6 +9,7 @@ public class GameDataFile
     public int[] CameraOffsetPos = new int[]{0, 0};
     public int[] BackgroundColor = new int[] {105, 200, 75};
     public int[] CameraBorders = new int[] { 258, 258, 258, 258 };
+    public int[] EnemySpeed = new int[] { 9, 10, 13 };
 }
 
 public static class SaveLoadSystem
@@ -26,7 +27,8 @@ public static class SaveLoadSystem
         var convertedCameraOffset = ":" + string.Join(",", GameData.CameraOffsetPos);
         var convertedColor = "\n:" + string.Join(",", GameData.BackgroundColor);
         var convertedCameraBorders = "\n:" + string.Join(",", GameData.CameraBorders);
-        File.WriteAllText("MyLevel/gamedata", convertedCameraOffset + convertedColor + convertedCameraBorders);
+        var convertedEnemySpeed = "\n:" + string.Join(",", GameData.EnemySpeed);
+        File.WriteAllText("MyLevel/leveldata", convertedCameraOffset + convertedColor + convertedCameraBorders + convertedEnemySpeed);
     }
     private static string BoardToString(List<List<List<int>>> thisBoard)
     {
@@ -77,7 +79,7 @@ public static class SaveLoadSystem
     }
     private static void LoadGameData()
     {
-        var data = File.ReadAllLines("MyLevel/gamedata");
+        var data = File.ReadAllLines("MyLevel/leveldata");
         var entireData = new List<List<int>>();
 
         foreach (var dataItem in data)
@@ -93,12 +95,15 @@ public static class SaveLoadSystem
         GameData.CameraOffsetPos = entireData[0].ToArray();
         GameData.BackgroundColor = entireData[1].ToArray();
         GameData.CameraBorders = entireData[2].ToArray();
+        GameData.EnemySpeed = entireData[3].ToArray();
         var j = 0;
         foreach (var dataItem in entireData[0]) { MenuGameData.TextBoxesCameraOffset[j].NumberPressed = Convert.ToInt32(dataItem); j++; }
         j = 0;
         foreach (var dataItem in entireData[1]) { MenuGameData.TextBoxesBackgroundColor[j].NumberPressed = Convert.ToInt32(dataItem); j++; }
         j = 0;
         foreach (var dataItem in entireData[2]) { MenuGameData.TextBoxesCameraBoundaries[j].NumberPressed = Convert.ToInt32(dataItem); j++; }
+        j = 0;
+        foreach (var dataItem in entireData[3]) { MenuGameData.TextBoxesEnemySpeed[j].NumberPressed = Convert.ToInt32(dataItem); j++; }
     }
     public static void GenerateBoard()
     {

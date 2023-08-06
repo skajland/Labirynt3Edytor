@@ -28,8 +28,8 @@ internal static class Program
         UseFull.Start();
         BlockSpawn.Start();
         MenuBlock.Start();
-        MenuGameData.Start();
         MenuTop.Start();
+        MenuGameData.Start();
         MiniMenuTop.Start();
     }
 

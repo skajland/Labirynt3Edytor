@@ -72,6 +72,7 @@ public static class MenuGameData
     public static readonly List<TextBox> TextBoxesCameraBoundaries = new List<TextBox>();
     public static readonly List<TextBox> TextBoxesCameraOffset = new List<TextBox>();
     public static readonly List<TextBox> TextBoxesBackgroundColor = new List<TextBox>();
+    public static readonly List<TextBox> TextBoxesEnemySpeed = new List<TextBox>();
     private static readonly List<Button> AddButtons = new List<Button>();
     private static readonly List<Button> RemoveButtons = new List<Button>();
     private static void Update()
@@ -81,19 +82,21 @@ public static class MenuGameData
         foreach (var textBox in TextBoxesCameraBoundaries) textBox.Update();
         foreach (var textBox in TextBoxesCameraOffset) textBox.Update();
         foreach (var textBox in TextBoxesBackgroundColor) textBox.Update();
-        
+        foreach (var textBox in TextBoxesEnemySpeed) textBox.Update();      
         foreach (var addButton in AddButtons) addButton.Collision();
         foreach (var removeButton in RemoveButtons) removeButton.Collision();
         
         SaveLoadSystem.GameData.CameraOffsetPos = new []{TextBoxesCameraOffset[0].NumberPressed, TextBoxesCameraOffset[1].NumberPressed};
         SaveLoadSystem.GameData.CameraBorders = new []{TextBoxesCameraBoundaries[0].NumberPressed, TextBoxesCameraBoundaries[1].NumberPressed, 
             TextBoxesCameraBoundaries[2].NumberPressed, TextBoxesCameraBoundaries[3].NumberPressed};
+        SaveLoadSystem.GameData.BackgroundColor = new []{TextBoxesBackgroundColor[0].NumberPressed, TextBoxesBackgroundColor[1].NumberPressed, 
+            TextBoxesBackgroundColor[2].NumberPressed};   
+        SaveLoadSystem.GameData.EnemySpeed = new []{TextBoxesEnemySpeed[0].NumberPressed, TextBoxesEnemySpeed[1].NumberPressed, 
+            TextBoxesEnemySpeed[2].NumberPressed};       
         foreach (var textBoxBackgroundColor in TextBoxesBackgroundColor)
         {
             if (textBoxBackgroundColor.NumberPressed >= 255) textBoxBackgroundColor.NumberPressed = 255;
         }
-        SaveLoadSystem.GameData.BackgroundColor = new []{TextBoxesBackgroundColor[0].NumberPressed, TextBoxesBackgroundColor[1].NumberPressed, 
-            TextBoxesBackgroundColor[2].NumberPressed};   
     }
 
     public static void Start()
@@ -108,7 +111,7 @@ public static class MenuGameData
         for (int i = -1; i < 1; i++)
         {
             var index = i + 1;
-            var buttonPos = new Vector2(textBoxPos.X + 200 * i + 100, textBoxPos.Y + 30);
+            var buttonPos = new Vector2(textBoxPos.X + 200 * i + 100, textBoxPos.Y - 70);
             TextBoxesCameraOffset.Add(new TextBox(new Rectangle(buttonPos.X, buttonPos.Y, textBoxSize.X, textBoxSize.Y),
                 SaveLoadSystem.GameData.CameraOffsetPos[index], 64, 3, Color.BEIGE, Color.BROWN, true, false));
             
@@ -123,26 +126,29 @@ public static class MenuGameData
         for (int i = -2; i < 2; i++)
         {
             var index = i + 2;
-            var buttonPos = new Vector2(textBoxPos.X + 170 * i + 85, textBoxPos.Y - 200 + textBoxSize.Y);
+            var buttonPos = new Vector2(textBoxPos.X + 170 * i + 85, textBoxPos.Y - 300 + textBoxSize.Y);
             var addButton = UseFull.CreateButton(minusButtonTexture, buttonPos,
                 () => TextBoxesCameraBoundaries[index].NumberPressed -= 86);
             var removeButton = UseFull.CreateButton(addButtonTexture,
                 buttonPos with {X = buttonPos.X + textBoxSize.X - addButtonTexture.width},
                 () => TextBoxesCameraBoundaries[index].NumberPressed += 86);
             
-            TextBoxesCameraBoundaries.Add(new TextBox(new Rectangle(textBoxPos.X + 170 * i + 85, textBoxPos.Y - 200, textBoxSize.X, textBoxSize.Y),
+            TextBoxesCameraBoundaries.Add(new TextBox(new Rectangle(textBoxPos.X + 170 * i + 85, textBoxPos.Y - 300, textBoxSize.X, textBoxSize.Y),
                 SaveLoadSystem.GameData.CameraBorders[index], 64, 3, Color.BEIGE, Color.BROWN, true, false));
             AddButtons.Add(addButton);
             RemoveButtons.Add(removeButton);
         }
         for (int i = -1; i < 2; i++){
-            TextBoxesBackgroundColor.Add(new TextBox(new Rectangle(textBoxPos.X + 200 * i, textBoxPos.Y + 250, textBoxSize.X, textBoxSize.Y),
+            TextBoxesBackgroundColor.Add(new TextBox(new Rectangle(textBoxPos.X + 170 * i, textBoxPos.Y + 150, textBoxSize.X, textBoxSize.Y),
                 SaveLoadSystem.GameData.BackgroundColor[i + 1], 64, 3, Color.BEIGE, Color.BROWN, false, true));
         }
+        for (int i = -1; i < 2; i++){
+            TextBoxesEnemySpeed.Add(new TextBox(new Rectangle(textBoxPos.X + 170 * i, textBoxPos.Y + 350, textBoxSize.X, textBoxSize.Y),
+                SaveLoadSystem.GameData.EnemySpeed[i + 1], 64, 3, Color.BEIGE, Color.BROWN, false, true));
+        }
         Vector2 size = new Vector2(750, 850);
-        Vector2 menuPos = new Vector2(Convert.ToInt32(Raylib.GetScreenWidth() / 2) - size.X / 2,
-            Convert.ToInt32(Raylib.GetScreenHeight()) - size.Y);
-        MenuRect = new Rectangle(menuPos.X, menuPos.Y, size.X, size.Y);
+        Vector2 menuPos = new Vector2(Convert.ToInt32(Raylib.GetScreenWidth() / 2) - size.X / 2,0);
+        MenuRect = new Rectangle(menuPos.X, menuPos.Y, size.X, Raylib.GetScreenHeight());
     }
     private static void Render()
     {
@@ -151,17 +157,19 @@ public static class MenuGameData
         foreach (var textBox in TextBoxesCameraBoundaries) textBox.Render();
         foreach (var textBox in TextBoxesCameraOffset) textBox.Render();
         foreach (var textBox in TextBoxesBackgroundColor) textBox.Render();
-        
+        foreach (var textBox in TextBoxesEnemySpeed) textBox.Render();
         foreach (var addButton in AddButtons) addButton.Render();
         foreach (var removeButton in RemoveButtons) removeButton.Render();
         
         const int fontSize = 48;
         Raylib.DrawText("Camera Offset", Raylib.GetScreenWidth() / 2 - Raylib.MeasureText("Camera Offset", fontSize) / 2,
-            Raylib.GetScreenHeight() / 2 - 100, fontSize, Color.ORANGE);
+            Raylib.GetScreenHeight() / 2 - 180, fontSize, Color.ORANGE);
         Raylib.DrawText("Background Color", Raylib.GetScreenWidth() / 2 - Raylib.MeasureText("Background Color", fontSize) / 2,
-            Raylib.GetScreenHeight() / 2 + 130, fontSize, Color.ORANGE);
+            Raylib.GetScreenHeight() / 2 + 20, fontSize, Color.ORANGE);
         Raylib.DrawText("Camera Boundaries", Raylib.GetScreenWidth() / 2 - Raylib.MeasureText("Camera Boundaries", fontSize) / 2,
-            Raylib.GetScreenHeight() / 2 - 320, fontSize, Color.ORANGE);
+            Raylib.GetScreenHeight() / 2 - 420, fontSize, Color.ORANGE);
+        Raylib.DrawText("Enemy Speed", Raylib.GetScreenWidth() / 2 - Raylib.MeasureText("Enemy Speed", fontSize) / 2,
+            Raylib.GetScreenHeight() / 2 + 230, fontSize, Color.ORANGE);
     }
 }
 
