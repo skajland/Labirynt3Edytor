@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/skajland/Downloads/Code/C#/Labirynt 3 Edytor/Labirynt 3 Edytor.csproj": {}
+    "/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/Labirynt 3 Edytor.csproj": {}
   },
   "projects": {
-    "/home/skajland/Downloads/Code/C#/Labirynt 3 Edytor/Labirynt 3 Edytor.csproj": {
+    "/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/Labirynt 3 Edytor.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/skajland/Downloads/Code/C#/Labirynt 3 Edytor/Labirynt 3 Edytor.csproj",
+        "projectUniqueName": "/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/Labirynt 3 Edytor.csproj",
         "projectName": "Labirynt 3 Edytor",
-        "projectPath": "/home/skajland/Downloads/Code/C#/Labirynt 3 Edytor/Labirynt 3 Edytor.csproj",
+        "projectPath": "/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/Labirynt 3 Edytor.csproj",
         "packagesPath": "/home/skajland/.nuget/packages/",
-        "outputPath": "/home/skajland/Downloads/Code/C#/Labirynt 3 Edytor/obj/",
+        "outputPath": "/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/skajland/.nuget/NuGet/NuGet.Config"
