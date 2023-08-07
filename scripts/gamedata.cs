@@ -77,6 +77,20 @@ public static class SaveLoadSystem
 
         BlockSpawn.Board = newBoard;
     }
+
+    public static int LoadCoins()
+    {
+        var data = File.ReadAllLines("/home/skajland/Downloads/Labirynt 3/data/data");
+        int dataToInt = 0;
+        foreach (var itemData in data)
+        {
+            if (itemData == "True")
+            {
+                dataToInt += 1;
+            }
+        }
+        return dataToInt;
+    }
     private static void LoadGameData()
     {
         var data = File.ReadAllLines("MyLevel/leveldata");

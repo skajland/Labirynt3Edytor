@@ -9,9 +9,11 @@ namespace Labirynt_3_Edytor.scripts{
         public static List<List<List<int>>> Board = new List<List<List<int>>>();
         private const int GridSize = 86;
         public static readonly List<int> UsedBlockIndex = new List<int>();
+        
+        public static readonly int Coins = SaveLoadSystem.LoadCoins();
+        
         public static readonly Block[] BlocksList =
-        {
-            new Block(Raylib.LoadImage("res/blocks/grass.png"), new Vector2(86,86),1, 1, "B", 0),
+        {   new Block(Raylib.LoadImage("res/blocks/grass.png"), new Vector2(86,86),1, 1, "B", 0),
             new Block(Raylib.LoadImage("res/entities/enemy.png"), new Vector2(72,92),2,2, "E", 0),
             new Block(Raylib.LoadImage("res/entities/Player.png"), new Vector2(86,86),3, 3, "E", 0),
             new Block(Raylib.LoadImage("res/blocks/key.png"), new Vector2(86,86), 4, 2, "BI", 0),
@@ -23,7 +25,6 @@ namespace Labirynt_3_Edytor.scripts{
             new Block(Raylib.LoadImage("res/blocks/sand.png"), new Vector2(86,86), 10, 1, "B", 0)
         };
         public static Block CurrentBlock = BlocksList[0];
-        public const int Coins = 0;
         
         private enum States { 
             Running,
@@ -63,7 +64,8 @@ namespace Labirynt_3_Edytor.scripts{
                     for (int k = 0; k < Board[i][j].Count; k++)
                     {
                         if(Board[i][j][k] == 0) continue;
-                        if(BlocksList[Board[i][j][k] - 1].Filter != CurrentBlock.Filter) continue;
+                        var index = Program.CalculateIndex(Board[i][j][k]);
+                        if(BlocksList[index].Filter != CurrentBlock.Filter) continue;
                         Board[i][j][k] = CurrentBlock.Index; 
                         return;
                     }
