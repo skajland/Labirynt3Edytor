@@ -14,7 +14,7 @@ namespace Labirynt_3_Edytor.scripts{
         
         public static readonly Block[] BlocksList =
         {   new Block(Raylib.LoadImage("res/blocks/grass.png"), new Vector2(86,86),1, 1, "B", 0),
-            new Block(Raylib.LoadImage("res/entities/enemy.png"), new Vector2(72,92),2,2, "E", 0),
+            new Block(Raylib.LoadImage("res/entities/enemy.png"), new Vector2(72,92),2,3, "E", 0),
             new Block(Raylib.LoadImage("res/entities/Player.png"), new Vector2(86,86),3, 3, "E", 0),
             new Block(Raylib.LoadImage("res/blocks/key.png"), new Vector2(86,86), 4, 2, "BI", 0),
             new Block(Raylib.LoadImage("res/blocks/entrance.png"), new Vector2(86,86), 5, 3, "BI", 0),
