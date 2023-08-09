@@ -21,7 +21,8 @@ internal static class Program
 
     private static void Start()
     {
-        Raylib.InitWindow(1462, 946, "Labirynt 3 Edytor");
+        Raylib.InitWindow(1920, 1080, "Labirynt 3 Edytor");
+        Raylib.ToggleFullscreen();
         Raylib.SetTargetFPS(90);
         SaveLoadSystem.GenerateBoard();
         Camera.Start();
