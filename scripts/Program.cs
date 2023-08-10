@@ -8,8 +8,13 @@ internal static class Program
     public static Action UpdateScripts = () => {};
     public static Action RenderScripts = () => {};
     public static bool Running = true;
+    public static string GlobalDir = "";
+    public static string DataDir = "";
     public static void Main()
     {
+        string[] workingDirectorySplit = Directory.GetCurrentDirectory().Split('/');
+        GlobalDir = "/" + string.Join("/", workingDirectorySplit, 1, workingDirectorySplit.Length - 2) + "/";
+        DataDir = GlobalDir + "data/";
         Start();
         while (Running)
         {

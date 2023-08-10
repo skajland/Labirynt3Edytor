@@ -28,7 +28,7 @@ public static class SaveLoadSystem
         var convertedColor = "\n:" + string.Join(",", GameData.BackgroundColor);
         var convertedCameraBorders = "\n:" + string.Join(",", GameData.CameraBorders);
         var convertedEnemySpeed = "\n:" + string.Join(",", GameData.EnemySpeed);
-        File.WriteAllText("MyLevel/leveldata", convertedCameraOffset + convertedColor + convertedCameraBorders + convertedEnemySpeed);
+        File.WriteAllText(Program.DataDir + "MyLevel/leveldata", convertedCameraOffset + convertedColor + convertedCameraBorders + convertedEnemySpeed);
     }
     private static string BoardToString(List<List<List<int>>> thisBoard)
     {
@@ -46,7 +46,7 @@ public static class SaveLoadSystem
 
     private static void ExportLevel()
     {
-        File.WriteAllText("MyLevel/level", BoardToString(BlockSpawn.Board));
+        File.WriteAllText(Program.DataDir + "MyLevel/level", BoardToString(BlockSpawn.Board));
     }
     public static void LoadGame()
     {
@@ -56,7 +56,7 @@ public static class SaveLoadSystem
     
     private static void LoadLevel()
     {
-        string[] boardRows = File.ReadAllLines("MyLevel/level");
+        string[] boardRows = File.ReadAllLines(Program.DataDir + "MyLevel/level");
         List<List<List<int>>> newBoard = new List<List<List<int>>>();
         foreach(string boardRow in boardRows)
         {
@@ -80,7 +80,7 @@ public static class SaveLoadSystem
 
     public static int LoadCoins()
     {
-        var data = File.ReadAllLines("/home/skajland/Downloads/Labirynt 3/data/data");
+        var data = File.ReadAllLines(Program.DataDir + "/data");
         int dataToInt = 0;
         foreach (var itemData in data)
         {
@@ -93,7 +93,7 @@ public static class SaveLoadSystem
     }
     private static void LoadGameData()
     {
-        var data = File.ReadAllLines("MyLevel/leveldata");
+        var data = File.ReadAllLines(Program.DataDir + "MyLevel/leveldata");
         var entireData = new List<List<int>>();
 
         foreach (var dataItem in data)

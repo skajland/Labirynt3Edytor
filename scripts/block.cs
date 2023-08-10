@@ -12,7 +12,6 @@ namespace Labirynt_3_Edytor.scripts
         public readonly int Index;
         public Block(Image img, Vector2 size, int index, int layer, string filter, int price)
         {
-            Console.WriteLine(BlockSpawn.Coins);
             if(BlockSpawn.Coins < price) return;
             Index = index;
             Layer = layer;

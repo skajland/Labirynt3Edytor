@@ -103,8 +103,8 @@ public static class MenuGameData
     {
         Program.UpdateScripts += Update;
         Program.RenderScripts += Render;
-        Texture2D addButtonTexture = Raylib.LoadTexture("res/AddButton.png");
-        Texture2D minusButtonTexture = Raylib.LoadTexture("res/MinusButton.png");
+        Texture2D addButtonTexture = Raylib.LoadTexture(Program.DataDir + "res/AddButton.png");
+        Texture2D minusButtonTexture = Raylib.LoadTexture(Program.DataDir + "res/MinusButton.png");
         Vector2 textBoxSize =  new Vector2(150, 100);
         Vector2 textBoxPos = new Vector2(Convert.ToInt32(Raylib.GetScreenWidth() / 2) - textBoxSize.X / 2,
             Convert.ToInt32(Raylib.GetScreenHeight() / 2) - textBoxSize.Y / 2);
@@ -190,12 +190,12 @@ internal static class MenuTop
     {
         Program.UpdateScripts += Update;
         Program.RenderScripts += Render;
-        var menuImg = Raylib.LoadImage("res/menu.png");
+        var menuImg = Raylib.LoadImage(Program.DataDir + "res/menu.png");
         Raylib.ImageResizeNN(ref menuImg, 86, 86);
         _menuButton = UseFull.CreateButton(Raylib.LoadTextureFromImage(menuImg), new Vector2(0, 0),
             () => MiniMenuTop.Enabled = !MiniMenuTop.Enabled);
         
-        Image buttonImage = Raylib.LoadImage("res/TpPlayer.png");
+        Image buttonImage = Raylib.LoadImage(Program.DataDir + "res/TpPlayer.png");
         Raylib.ImageResizeNN(ref buttonImage, 64, 64);
         Texture2D buttonTexture = Raylib.LoadTextureFromImage(buttonImage);
         var pos = new Vector2(Convert.ToInt32(Raylib.GetScreenWidth() - 300), TopRect.height / 2 - Convert.ToInt32(buttonTexture.height / 2));
@@ -254,7 +254,7 @@ internal static class MiniMenuTop
             Rect.y + 64), SaveLoadSystem.SaveGame);
         _gameDataMenuButton = UseFull.CreateButton("Mapa(T)", Color.GOLD, 48, new Vector2(0,
             Rect.y + 128), () => MenuGameData.MenuRectEnabled = !MenuGameData.MenuRectEnabled); 
-        _leaveButton = UseFull.CreateButton("Wyjc", Color.GOLD, 48, new Vector2(0,
+        _leaveButton = UseFull.CreateButton("Wyjc(Esc)", Color.GOLD, 48, new Vector2(0,
             Rect.y + 192), () => Program.Running = false);
     }
     
