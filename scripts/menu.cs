@@ -30,10 +30,12 @@ internal static class MenuBlock
 
         for (var i = 0; i < blockListLength; i++)
         {
+            int index = Program.CalculateIndex(i + 1);
+            if(BlockSpawn.BlocksList[index].Coins > BlockSpawn.Coins) continue;
             var row = i / rowLength;
             var col = i % rowLength;
 
-            Texture2D buttonTexture = BlockSpawn.BlocksList[i].Texture;
+            Texture2D buttonTexture = BlockSpawn.BlocksList[index].Texture;
             Image buttonImage = Raylib.LoadImageFromTexture(buttonTexture);
             Raylib.ImageResizeNN(ref buttonImage, 64, 64);
             buttonTexture = Raylib.LoadTextureFromImage(buttonImage);
@@ -41,7 +43,7 @@ internal static class MenuBlock
             var buttonX = menuPos.X + col * buttonSize;
             var buttonY = menuPos.Y + row * buttonSize;
 
-            CreateButton(buttonTexture, new Vector2(buttonX, buttonY), i);
+            CreateButton(buttonTexture, new Vector2(buttonX, buttonY), index);
         }
         
 
@@ -238,11 +240,12 @@ internal static class MenuTop
 
 internal static class MiniMenuTop
 {
-    public static readonly Rectangle Rect = new Rectangle(0, MenuTop.TopRect.height, 236, 258);
+    public static readonly Rectangle Rect = new Rectangle(0, MenuTop.TopRect.height, 236, 322);
     public static bool Enabled;
     private static Button? _loadButton;
     private static Button? _saveButton;
     private static Button? _gameDataMenuButton;
+    private static Button? _coinsMenu;
     private static Button? _leaveButton;
     public static void Start()
     {
@@ -253,9 +256,11 @@ internal static class MiniMenuTop
         _saveButton = UseFull.CreateButton("Zapis(J)", Color.GOLD, 48, new Vector2(0,
             Rect.y + 64), SaveLoadSystem.SaveGame);
         _gameDataMenuButton = UseFull.CreateButton("Mapa(T)", Color.GOLD, 48, new Vector2(0,
-            Rect.y + 128), () => MenuGameData.MenuRectEnabled = !MenuGameData.MenuRectEnabled); 
+            Rect.y + 128), () => MenuGameData.MenuRectEnabled = !MenuGameData.MenuRectEnabled);
+        _coinsMenu = UseFull.CreateButton("Itemki(Y)", Color.GOLD, 48, new Vector2(0,
+            Rect.y + 192), () => CoinsMenu.MenuRectEnabled = !CoinsMenu.MenuRectEnabled);
         _leaveButton = UseFull.CreateButton("Wyjc(Esc)", Color.GOLD, 48, new Vector2(0,
-            Rect.y + 192), () => Program.Running = false);
+            Rect.y + 256), () => Program.Running = false);
     }
     
     private static void Update()
@@ -264,6 +269,7 @@ internal static class MiniMenuTop
         _loadButton?.Collision();
         _saveButton?.Collision();
         _gameDataMenuButton?.Collision();
+        _coinsMenu?.Collision();
         _leaveButton?.Collision();
     }
 
@@ -273,7 +279,8 @@ internal static class MiniMenuTop
         Raylib.DrawRectangleRec(Rect, Color.DARKBROWN);
         _loadButton?.Render();
         _saveButton?.Render();      
-        _gameDataMenuButton?.Render();       
+        _gameDataMenuButton?.Render();     
+        _coinsMenu?.Render();
         _leaveButton?.Render();      
     }
 }
@@ -300,13 +307,23 @@ public static class CoinsMenu
     {
         if (!MenuRectEnabled) return;
         Raylib.DrawRectangleRec(MenuRect, Color.DARKGRAY);
-        const int fontSize = 86;
+        const int fontSize = 128;
+        const int spacing = 150;
         for (int i = 0; i < BlockIndexes.Count; i++)
         {
             int blockIndex = Program.CalculateIndex(BlockIndexes[i]);
-            Console.WriteLine(BlockIndexes[i]);
-            Raylib.DrawText(BlockSpawn.BlocksList[blockIndex].Coins.ToString(), Raylib.GetScreenWidth() / 2 - Raylib.MeasureText(BlockSpawn.BlocksList[blockIndex].Coins.ToString(), fontSize) + 250,
-                fontSize + 100 * i, fontSize, Color.ORANGE);    
+            Raylib.DrawText(BlockSpawn.BlocksList[blockIndex].Coins.ToString(), Raylib.GetScreenWidth() / 2 - Raylib.MeasureText(BlockSpawn.BlocksList[blockIndex].Coins.ToString(), fontSize) / 2,
+                fontSize + spacing * i, fontSize, Color.ORANGE);
+            Texture2D blockTexture = ResizeTexture(BlockSpawn.BlocksList[blockIndex].Texture, new []{ fontSize, fontSize } );
+            Raylib.DrawTexture(blockTexture, Raylib.GetScreenWidth() / 2 - 250,fontSize + spacing * i, Color.WHITE);    
         }
+    }
+
+    private static Texture2D ResizeTexture(Texture2D texture, int[] size)
+    {
+        Image blockImage = Raylib.LoadImageFromTexture(texture);
+        Raylib.ImageResizeNN(ref blockImage, size[0], size[1]);
+        Texture2D blockTexture = Raylib.LoadTextureFromImage(blockImage);
+        return blockTexture;
     }
 }
