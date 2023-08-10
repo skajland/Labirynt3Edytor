@@ -277,3 +277,36 @@ internal static class MiniMenuTop
         _leaveButton?.Render();      
     }
 }
+
+public static class CoinsMenu
+{
+    public static Rectangle MenuRect;
+    public static bool MenuRectEnabled;
+    public static List<int> BlockIndexes = new List<int>();
+    private static void Update()
+    {
+        if (Raylib.IsKeyPressed(KeyboardKey.KEY_Y)) MenuRectEnabled = !MenuRectEnabled;
+    }
+
+    public static void Start()
+    {
+        Program.UpdateScripts += Update;
+        Program.RenderScripts += Render;
+        Vector2 size = new Vector2(750, 850);
+        Vector2 menuPos = new Vector2(Convert.ToInt32(Raylib.GetScreenWidth() / 2) - size.X / 2,0);
+        MenuRect = new Rectangle(menuPos.X, menuPos.Y, size.X, Raylib.GetScreenHeight());
+    }
+    private static void Render()
+    {
+        if (!MenuRectEnabled) return;
+        Raylib.DrawRectangleRec(MenuRect, Color.DARKGRAY);
+        const int fontSize = 86;
+        for (int i = 0; i < BlockIndexes.Count; i++)
+        {
+            int blockIndex = Program.CalculateIndex(BlockIndexes[i]);
+            Console.WriteLine(BlockIndexes[i]);
+            Raylib.DrawText(BlockSpawn.BlocksList[blockIndex].Coins.ToString(), Raylib.GetScreenWidth() / 2 - Raylib.MeasureText(BlockSpawn.BlocksList[blockIndex].Coins.ToString(), fontSize) + 250,
+                fontSize + 100 * i, fontSize, Color.ORANGE);    
+        }
+    }
+}

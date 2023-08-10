@@ -21,11 +21,11 @@ public static class Camera
         }
         else if (CameraOffset.X >= Convert.ToInt32(Raylib.GetScreenWidth() / 2))
         {
-            CameraOffset.X = 0 + Convert.ToInt32(Raylib.GetScreenWidth() / 2);
+            CameraOffset.X = Convert.ToInt32(Raylib.GetScreenWidth() / 2);
         }
         if (CameraOffset.Y >= Convert.ToInt32(Raylib.GetScreenHeight() / 2))
         {
-            CameraOffset.Y = 0 + Convert.ToInt32(Raylib.GetScreenHeight() / 2);
+            CameraOffset.Y = Convert.ToInt32(Raylib.GetScreenHeight() / 2);
         }
         else if (BlockSpawn.Board.Count * 86 + CameraOffset.Y <= Convert.ToInt32(Raylib.GetScreenHeight() / 2))
         {

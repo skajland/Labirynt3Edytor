@@ -20,9 +20,9 @@ namespace Labirynt_3_Edytor.scripts{
             new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/entrance.png"), new Vector2(86,86), 5, 3, "BI", 0),
             new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/entrance.png"), new Vector2(86,86), 6, 3, "BI", 0),
             new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/WinBlock.png"),new Vector2(86,86), 7, 2, "B", 0),
-            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/WaterBlock.png"), new Vector2(86,86), 8, 2, "B", 0),
-            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/OakLog.png"), new Vector2(86,86), 9, 2, "BI", 0),
-            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/sand.png"), new Vector2(86,86), 10, 1, "B", 0)
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/WaterBlock.png"), new Vector2(86,86), 8, 2, "B", 20),
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/OakLog.png"), new Vector2(86,86), 9, 2, "BI", 30),
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/sand.png"), new Vector2(86,86), 10, 1, "B", 31)
         };
         public static Block CurrentBlock = BlocksList[0];
         

@@ -35,6 +35,7 @@ internal static class Program
         BlockSpawn.Start();
         MenuBlock.Start();
         MenuTop.Start();
+        CoinsMenu.Start();
         MenuGameData.Start();
         MiniMenuTop.Start();
     }

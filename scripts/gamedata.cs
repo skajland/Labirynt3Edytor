@@ -121,8 +121,8 @@ public static class SaveLoadSystem
     }
     public static void GenerateBoard()
     {
-        const int width = 64;
-        const int height = 64;
+        const int width = 128;
+        const int height = 128;
             
         BlockSpawn.Board.Clear();
             
@@ -178,7 +178,9 @@ internal static class UseFull
                             MenuGameData.MenuRectEnabled ||
                             Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), MenuTop.TopRect) ||
                             Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), MiniMenuTop.Rect) &&
-                            MiniMenuTop.Enabled;
+                            MiniMenuTop.Enabled ||
+                            Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), CoinsMenu.MenuRect) &&
+                            CoinsMenu.MenuRectEnabled;
     }
 
     private static void RenderBoundaries()
