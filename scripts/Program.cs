@@ -85,7 +85,7 @@ internal static class Program
                 for (var k = 0; k < sortedBoard[i][j].Count; k++)
                 {
                     if(sortedBoard[i][j][k] == 0) break;
-                    var index = CalculateIndex(sortedBoard[i][j][k]);
+                    var index = UseFull.CalculateIndex(sortedBoard[i][j][k]);
                     var blockMiddleX = (86 - BlockSpawn.BlocksList[index].Texture.width) / 2;
                     var blockMiddleY = (86 - BlockSpawn.BlocksList[index].Texture.height) / 2;
                     Raylib.DrawTextureV(BlockSpawn.BlocksList[index].Texture,
@@ -95,21 +95,11 @@ internal static class Program
             }
         }
     }
-
-    public static int CalculateIndex(int item)
-    {
-        for (int i = 0; i < BlockSpawn.BlocksList.Length; i++)
-        {
-            if (item != BlockSpawn.BlocksList[i].Index) continue;
-            return i;
-        }
-        return 0;
-    }
     
     private static int CompareGrids(int grid1, int grid2)
     {
-        int index1 = CalculateIndex(grid1);
-        int index2 = CalculateIndex(grid2);
+        int index1 = UseFull.CalculateIndex(grid1);
+        int index2 = UseFull.CalculateIndex(grid2);
         int sum1 = BlockSpawn.BlocksList[index1].Layer;
         int sum2 = BlockSpawn.BlocksList[index2].Layer;
 

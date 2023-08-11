@@ -20,30 +20,27 @@ internal static class MenuBlock
         Program.UpdateScripts += Update;
         Program.RenderScripts += Render;
         var menuPos = new Vector2();
-        float blockListLength = BlockSpawn.BlocksList.Length;
         const int buttonSize = 64;
         const int rowLength = 12;
         const int gridWidth = rowLength * buttonSize;
         const int gridHeight = buttonSize * 3;
         menuPos.X = Convert.ToInt32(Raylib.GetScreenWidth() / 2 - gridWidth / 2);
         menuPos.Y = Convert.ToInt32(Raylib.GetScreenHeight() - gridHeight);
-
-        for (var i = 0; i < blockListLength; i++)
+        int j = 0;
+        foreach (var block in BlockSpawn.BlocksList)
         {
-            int index = Program.CalculateIndex(i + 1);
-            if(BlockSpawn.BlocksList[index].Coins > BlockSpawn.Coins) continue;
-            var row = i / rowLength;
-            var col = i % rowLength;
-
-            Texture2D buttonTexture = BlockSpawn.BlocksList[index].Texture;
-            Image buttonImage = Raylib.LoadImageFromTexture(buttonTexture);
-            Raylib.ImageResizeNN(ref buttonImage, 64, 64);
-            buttonTexture = Raylib.LoadTextureFromImage(buttonImage);
+            int index = UseFull.CalculateIndex(block.Index);
+            Texture2D buttonTexture = UseFull.ResizeTexture(BlockSpawn.BlocksList[index].Texture, new []{64, 64});
             PreloadedTextures.Add(buttonTexture);
+            if(BlockSpawn.BlocksList[index].Coins > BlockSpawn.Coins) continue;
+            var row = j / rowLength;
+            var col = j % rowLength;
+            
             var buttonX = menuPos.X + col * buttonSize;
             var buttonY = menuPos.Y + row * buttonSize;
 
             CreateButton(buttonTexture, new Vector2(buttonX, buttonY), index);
+            j++;
         }
         
 
@@ -289,7 +286,8 @@ public static class CoinsMenu
 {
     public static Rectangle MenuRect;
     public static bool MenuRectEnabled;
-    public static List<int> BlockIndexes = new List<int>();
+    public static readonly List<int> BlockIndexes = new List<int>();
+    private static List<Texture2D> _blockTexture = new List<Texture2D>();
     private static void Update()
     {
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_Y)) MenuRectEnabled = !MenuRectEnabled;
@@ -299,9 +297,14 @@ public static class CoinsMenu
     {
         Program.UpdateScripts += Update;
         Program.RenderScripts += Render;
-        Vector2 size = new Vector2(750, 850);
+        Vector2 size = new Vector2(400, 850);
         Vector2 menuPos = new Vector2(Convert.ToInt32(Raylib.GetScreenWidth() / 2) - size.X / 2,0);
         MenuRect = new Rectangle(menuPos.X, menuPos.Y, size.X, Raylib.GetScreenHeight());
+        foreach (var block in BlockSpawn.BlocksList)
+        {
+            _blockTexture.Add(UseFull.ResizeTexture(block.Texture, new []{ 128, 128 } ));
+        }
+        BlockIndexes.Sort(CoinSort);
     }
     private static void Render()
     {
@@ -311,19 +314,19 @@ public static class CoinsMenu
         const int spacing = 150;
         for (int i = 0; i < BlockIndexes.Count; i++)
         {
-            int blockIndex = Program.CalculateIndex(BlockIndexes[i]);
-            Raylib.DrawText(BlockSpawn.BlocksList[blockIndex].Coins.ToString(), Raylib.GetScreenWidth() / 2 - Raylib.MeasureText(BlockSpawn.BlocksList[blockIndex].Coins.ToString(), fontSize) / 2,
-                fontSize + spacing * i, fontSize, Color.ORANGE);
-            Texture2D blockTexture = ResizeTexture(BlockSpawn.BlocksList[blockIndex].Texture, new []{ fontSize, fontSize } );
-            Raylib.DrawTexture(blockTexture, Raylib.GetScreenWidth() / 2 - 250,fontSize + spacing * i, Color.WHITE);    
+            int blockIndex = UseFull.CalculateIndex(BlockIndexes[i]);
+            Raylib.DrawText(BlockSpawn.BlocksList[blockIndex].Coins.ToString(), Raylib.GetScreenWidth() / 2 - Raylib.MeasureText(BlockSpawn.BlocksList[blockIndex].Coins.ToString(), fontSize) / 2 + 100,
+                fontSize / 2 + spacing * i, fontSize, Color.ORANGE);
+            Raylib.DrawTexture(_blockTexture[blockIndex], Raylib.GetScreenWidth() / 2 - 170,fontSize / 2 + spacing * i, Color.WHITE);    
         }
     }
 
-    private static Texture2D ResizeTexture(Texture2D texture, int[] size)
+    private static int CoinSort(int block1, int block2)
     {
-        Image blockImage = Raylib.LoadImageFromTexture(texture);
-        Raylib.ImageResizeNN(ref blockImage, size[0], size[1]);
-        Texture2D blockTexture = Raylib.LoadTextureFromImage(blockImage);
-        return blockTexture;
+        int block1Index = UseFull.CalculateIndex(block1);
+        int block2Index = UseFull.CalculateIndex(block2);
+        int block1Coins = BlockSpawn.BlocksList[block1Index].Coins;
+        int block2Coins = BlockSpawn.BlocksList[block2Index].Coins;
+        return block1Coins.CompareTo(block2Coins);
     }
 }

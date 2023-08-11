@@ -18,11 +18,17 @@ namespace Labirynt_3_Edytor.scripts{
             new Block(Raylib.LoadImage(Program.DataDir + "res/Player.png"), new Vector2(86,86),3, 3, "E", 0),
             new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/key.png"), new Vector2(86,86), 4, 2, "BI", 0),
             new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/entrance.png"), new Vector2(86,86), 5, 3, "BI", 0),
-            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/entrance.png"), new Vector2(86,86), 6, 3, "BI", 0),
-            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/WinBlock.png"),new Vector2(86,86), 7, 2, "B", 0),
-            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/WaterBlock.png"), new Vector2(86,86), 8, 2, "B", 20),
-            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/OakLog.png"), new Vector2(86,86), 9, 2, "BI", 30),
-            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/sand.png"), new Vector2(86,86), 10, 1, "B", 31)
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/WinBlock.png"),new Vector2(86,86), 6, 2, "B", 0),
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/WaterBlock.png"), new Vector2(86,86), 7, 2, "B", 0),
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/OakLog.png"), new Vector2(86,86), 8, 2, "BI", 0),
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/sand.png"), new Vector2(86,86), 9, 1, "B", 0),
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/Redkey.png"), new Vector2(86,86), 15, 1, "BI", 2),
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/Greenkey.png"), new Vector2(86,86), 16, 1, "BI", 3),
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/Bluekey.png"), new Vector2(86,86), 17, 1, "BI", 4),
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/entranceRed.png"), new Vector2(86,86), 18, 1, "BI", 2),
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/entranceGreen.png"), new Vector2(86,86), 19, 1, "BI", 3),
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/entranceBlue.png"), new Vector2(86,86), 20, 1, "BI", 4)
+            
         };
         public static Block CurrentBlock = BlocksList[0];
         
@@ -64,7 +70,7 @@ namespace Labirynt_3_Edytor.scripts{
                     for (int k = 0; k < Board[i][j].Count; k++)
                     {
                         if(Board[i][j][k] == 0) continue;
-                        var index = Program.CalculateIndex(Board[i][j][k]);
+                        var index = UseFull.CalculateIndex(Board[i][j][k]);
                         if(BlocksList[index].Filter != CurrentBlock.Filter) continue;
                         Board[i][j][k] = CurrentBlock.Index; 
                         return;

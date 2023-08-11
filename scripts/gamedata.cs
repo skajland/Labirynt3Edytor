@@ -292,4 +292,20 @@ internal static class UseFull
             }
         }          
     }
+    public static Texture2D ResizeTexture(Texture2D texture, int[] size)
+    {
+        Image blockImage = Raylib.LoadImageFromTexture(texture);
+        Raylib.ImageResizeNN(ref blockImage, size[0], size[1]);
+        Texture2D blockTexture = Raylib.LoadTextureFromImage(blockImage);
+        return blockTexture;
+    }
+    public static int CalculateIndex(int item)
+    {
+        for (int i = 0; i < BlockSpawn.BlocksList.Length; i++)
+        {
+            if (item != BlockSpawn.BlocksList[i].Index) continue;
+            return i;
+        }
+        return 0;
+    }
 }    
