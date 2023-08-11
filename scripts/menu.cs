@@ -244,6 +244,7 @@ internal static class MiniMenuTop
     private static Button? _gameDataMenuButton;
     private static Button? _coinsMenu;
     private static Button? _leaveButton;
+    
     public static void Start()
     {
         Program.UpdateScripts += Update;
@@ -288,9 +289,14 @@ public static class CoinsMenu
     public static bool MenuRectEnabled;
     public static readonly List<int> BlockIndexes = new List<int>();
     private static List<Texture2D> _blockTexture = new List<Texture2D>();
+    private static float _offset;
+    
     private static void Update()
     {
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_Y)) MenuRectEnabled = !MenuRectEnabled;
+        float mouseScroll = Raylib.GetMouseWheelMove();
+        _offset += mouseScroll * 25;
+        if (_offset > 0) _offset = 0;
     }
 
     public static void Start()
@@ -310,14 +316,15 @@ public static class CoinsMenu
     {
         if (!MenuRectEnabled) return;
         Raylib.DrawRectangleRec(MenuRect, Color.DARKGRAY);
-        const int fontSize = 128;
         const int spacing = 150;
+        const int fontSize = 128;
         for (int i = 0; i < BlockIndexes.Count; i++)
         {
             int blockIndex = UseFull.CalculateIndex(BlockIndexes[i]);
+            int scrollOffset = Convert.ToInt32(_offset);
             Raylib.DrawText(BlockSpawn.BlocksList[blockIndex].Coins.ToString(), Raylib.GetScreenWidth() / 2 - Raylib.MeasureText(BlockSpawn.BlocksList[blockIndex].Coins.ToString(), fontSize) / 2 + 100,
-                fontSize / 2 + spacing * i, fontSize, Color.ORANGE);
-            Raylib.DrawTexture(_blockTexture[blockIndex], Raylib.GetScreenWidth() / 2 - 170,fontSize / 2 + spacing * i, Color.WHITE);    
+                fontSize / 2 + spacing * i + scrollOffset, fontSize, Color.ORANGE);
+            Raylib.DrawTexture(_blockTexture[blockIndex], Raylib.GetScreenWidth() / 2 - 170,fontSize / 2 + spacing * i + scrollOffset, Color.WHITE);    
         }
     }
 
