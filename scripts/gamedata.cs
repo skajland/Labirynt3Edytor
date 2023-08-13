@@ -308,4 +308,15 @@ internal static class UseFull
         }
         return 0;
     }
+}
+
+public struct Sounds
+{
+    public Sounds()
+    {
+    }
+
+    public Music Music = Raylib.LoadMusicStream(Program.DataDir + "Sounds/EdytorMusic.wav");
+    public string ButtonHighlightPath = Program.DataDir + "Sounds/ButtonHighlight.wav";
+    public string ButtonPressPath = Program.DataDir + "Sounds/ButtonPress.wav";
 }    

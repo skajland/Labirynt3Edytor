@@ -22,12 +22,12 @@ namespace Labirynt_3_Edytor.scripts{
             new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/WaterBlock.png"), new Vector2(86,86), 7, 2, "B", 0),
             new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/OakLog.png"), new Vector2(86,86), 8, 2, "BI", 0),
             new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/sand.png"), new Vector2(86,86), 9, 1, "B", 0),
-            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/Redkey.png"), new Vector2(86,86), 15, 1, "BI", 2),
-            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/Greenkey.png"), new Vector2(86,86), 16, 1, "BI", 3),
-            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/Bluekey.png"), new Vector2(86,86), 17, 1, "BI", 4),
-            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/entranceRed.png"), new Vector2(86,86), 18, 1, "BI", 2),
-            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/entranceGreen.png"), new Vector2(86,86), 19, 1, "BI", 3),
-            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/entranceBlue.png"), new Vector2(86,86), 20, 1, "BI", 4)
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/Redkey.png"), new Vector2(86,86), 15, 2, "BI", 2),
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/Greenkey.png"), new Vector2(86,86), 16, 2, "BI", 3),
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/Bluekey.png"), new Vector2(86,86), 17, 2, "BI", 4),
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/entranceRed.png"), new Vector2(86,86), 18, 3, "BI", 2),
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/entranceGreen.png"), new Vector2(86,86), 19, 3, "BI", 3),
+            new Block(Raylib.LoadImage(Program.DataDir + "res/blocks/entranceBlue.png"), new Vector2(86,86), 20, 3, "BI", 4)
             
         };
         public static Block CurrentBlock = BlocksList[0];

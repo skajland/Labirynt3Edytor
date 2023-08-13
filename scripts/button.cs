@@ -45,17 +45,20 @@ public class Button
     
     public void Collision()
     {
-        if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), _rect))
+        if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), _rect) && Raylib.GetMousePosition() != new Vector2(0,0))
         {
+            if (_buttonState == ButtonState.None) Raylib.PlaySound(Raylib.LoadSound(Program.GameSounds.ButtonHighlightPath));
             _buttonState = ButtonState.Hovering;
 
             if (Raylib.IsMouseButtonDown(MouseButton.MOUSE_LEFT_BUTTON)) _buttonState = ButtonState.Pressed;
 
             if (!Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON)) return;
+            Raylib.PlaySound(Raylib.LoadSound(Program.GameSounds.ButtonPressPath));
             foreach (var onClickFunc in _onClick)
             {
                 onClickFunc.Invoke();
             }
+            return;
         }
         _buttonState = ButtonState.None;
     }
