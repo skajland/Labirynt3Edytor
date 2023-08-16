@@ -98,7 +98,7 @@ namespace Labirynt_3_Edytor.scripts{
         private static void Update(){
             if (!UseFull.MenuRectCollision)
             {
-                if(Raylib.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT) || Raylib.IsMouseButtonDown(MouseButton.MOUSE_BUTTON_LEFT))
+                if(Raylib.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT) || Raylib.IsMouseButtonDown(MouseButton.MOUSE_BUTTON_LEFT) && Raylib.IsKeyDown(KeyboardKey.KEY_LEFT_SHIFT))
                 {
                     _state = States.Pressed;
                 }
