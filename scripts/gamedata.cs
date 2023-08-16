@@ -287,7 +287,7 @@ internal static class UseFull
                     var screenSize = new Vector2(Convert.ToInt32(Raylib.GetScreenWidth() / 2),Convert.ToInt32(Raylib.GetScreenHeight() / 2));
                     var gridSizeMiddle = 43;
                     var pos = new Vector2(j * 86 - screenSize.X + gridSizeMiddle, i * 86 - screenSize.Y + gridSizeMiddle); 
-                    Camera.CameraOffset = -pos;
+                    Camera.CameraOffset = -pos + new Vector2(SaveLoadSystem.GameData.CameraOffsetPos[0], SaveLoadSystem.GameData.CameraOffsetPos[1]);
                 }
             }
         }          
