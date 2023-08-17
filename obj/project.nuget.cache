@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "jP5dJbrf2tQzl2ekrDk3SUt1ZDaL7O5ShZQZr7Kw0BqeDoWMmXL+jILDbE0rsaLfZz8xwPnndQkW5MU1loDcDg==",
+  "dgSpecHash": "ISecjFxahOWGjmtFpTWt0oSBEVB42q0UDx9Sl/8QZbk14UAyDrCnoA52vlN7acPzMotaIwE9keKbrXVHuUn/eg==",
   "success": true,
   "projectFilePath": "/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/Labirynt 3 Edytor.csproj",
   "expectedPackageFiles": [
     "/home/skajland/.nuget/packages/raylib-cs/4.5.0.2/raylib-cs.4.5.0.2.nupkg.sha512",
-    "/home/skajland/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512"
+    "/home/skajland/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
+    "/home/skajland/.nuget/packages/microsoft.netcore.app.host.win-x64/7.0.9/microsoft.netcore.app.host.win-x64.7.0.9.nupkg.sha512"
   ],
   "logs": []
 }

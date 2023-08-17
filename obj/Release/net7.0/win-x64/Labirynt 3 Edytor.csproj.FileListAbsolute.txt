@@ -1,0 +1,18 @@
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/bin/Release/net7.0/win-x64/Labirynt 3 Edytor.exe
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/bin/Release/net7.0/win-x64/Labirynt 3 Edytor.deps.json
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/bin/Release/net7.0/win-x64/Labirynt 3 Edytor.runtimeconfig.json
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/bin/Release/net7.0/win-x64/Labirynt 3 Edytor.dll
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/bin/Release/net7.0/win-x64/Labirynt 3 Edytor.pdb
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/bin/Release/net7.0/win-x64/Raylib-cs.dll
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/bin/Release/net7.0/win-x64/raylib.dll
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/obj/Release/net7.0/win-x64/Labirynt 3 Edytor.csproj.AssemblyReference.cache
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/obj/Release/net7.0/win-x64/Labirynt 3 Edytor.GeneratedMSBuildEditorConfig.editorconfig
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/obj/Release/net7.0/win-x64/Labirynt 3 Edytor.AssemblyInfoInputs.cache
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/obj/Release/net7.0/win-x64/Labirynt 3 Edytor.AssemblyInfo.cs
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/obj/Release/net7.0/win-x64/Labirynt 3 Edytor.csproj.CoreCompileInputs.cache
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/obj/Release/net7.0/win-x64/Labirynt 3 Edytor.csproj.CopyComplete
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/obj/Release/net7.0/win-x64/Labirynt 3 Edytor.dll
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/obj/Release/net7.0/win-x64/refint/Labirynt 3 Edytor.dll
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/obj/Release/net7.0/win-x64/Labirynt 3 Edytor.pdb
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/obj/Release/net7.0/win-x64/Labirynt 3 Edytor.genruntimeconfig.cache
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/obj/Release/net7.0/win-x64/ref/Labirynt 3 Edytor.dll

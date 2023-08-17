@@ -1,0 +1,7 @@
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/bin/Release/net7.0/linux-x64/publish/Labirynt 3 Edytor
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/bin/Release/net7.0/linux-x64/publish/Labirynt 3 Edytor.dll
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/bin/Release/net7.0/linux-x64/publish/Labirynt 3 Edytor.deps.json
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/bin/Release/net7.0/linux-x64/publish/Labirynt 3 Edytor.runtimeconfig.json
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/bin/Release/net7.0/linux-x64/publish/Labirynt 3 Edytor.pdb
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/bin/Release/net7.0/linux-x64/publish/Raylib-cs.dll
+/home/skajland/Downloads/Labirynt 3/Labirynt 3 Edytor/bin/Release/net7.0/linux-x64/publish/libraylib.so

@@ -30,6 +30,12 @@ namespace Labirynt_3_Edytor.scripts;
             GlobalDir = "/" + string.Join("/", workingDirectorySplit, 1, workingDirectorySplit.Length - 2) + "/";
             DataDir = GlobalDir + "data/";
             Raylib.InitWindow(1920, 1080, "Labirynt 3 Edytor");
+            // Load your icon images using Raylib's ImageLoad function
+            Image iconImages = Raylib.LoadImage(DataDir + "res/Icon.png");
+
+            // Set the icon using the array of images
+            Raylib.SetWindowIcon(iconImages);
+            
             Raylib.ToggleFullscreen();
             Raylib.InitAudioDevice();
             
@@ -56,7 +62,7 @@ namespace Labirynt_3_Edytor.scripts;
             UpdateScripts.Invoke();
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_J)) SaveLoadSystem.SaveGame();
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_L)) SaveLoadSystem.LoadGame();
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_X)) UseFull.DeleteItems();
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_X) || Raylib.IsKeyDown(KeyboardKey.KEY_X) && Raylib.IsKeyDown(KeyboardKey.KEY_LEFT_SHIFT)) UseFull.DeleteItems();
             if (Raylib.WindowShouldClose()) Running = false;
         }
 

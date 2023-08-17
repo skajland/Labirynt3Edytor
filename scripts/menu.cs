@@ -84,18 +84,17 @@ public static class MenuGameData
         foreach (var textBox in TextBoxesEnemySpeed) textBox.Update();      
         foreach (var addButton in AddButtons) addButton.Collision();
         foreach (var removeButton in RemoveButtons) removeButton.Collision();
-        
+        foreach (var textBoxBackgroundColor in TextBoxesBackgroundColor)
+        {
+            if (textBoxBackgroundColor.NumberPressed >= 255) textBoxBackgroundColor.NumberPressed = 255;
+        }
         SaveLoadSystem.GameData.CameraOffsetPos = new []{TextBoxesCameraOffset[0].NumberPressed, TextBoxesCameraOffset[1].NumberPressed};
         SaveLoadSystem.GameData.CameraBorders = new []{TextBoxesCameraBoundaries[0].NumberPressed, TextBoxesCameraBoundaries[1].NumberPressed, 
             TextBoxesCameraBoundaries[2].NumberPressed, TextBoxesCameraBoundaries[3].NumberPressed};
         SaveLoadSystem.GameData.BackgroundColor = new []{TextBoxesBackgroundColor[0].NumberPressed, TextBoxesBackgroundColor[1].NumberPressed, 
             TextBoxesBackgroundColor[2].NumberPressed};   
         SaveLoadSystem.GameData.EnemySpeed = new []{TextBoxesEnemySpeed[0].NumberPressed, TextBoxesEnemySpeed[1].NumberPressed, 
-            TextBoxesEnemySpeed[2].NumberPressed};       
-        foreach (var textBoxBackgroundColor in TextBoxesBackgroundColor)
-        {
-            if (textBoxBackgroundColor.NumberPressed >= 255) textBoxBackgroundColor.NumberPressed = 255;
-        }
+            TextBoxesEnemySpeed[2].NumberPressed};
     }
 
     public static void Start()
@@ -161,13 +160,13 @@ public static class MenuGameData
         foreach (var removeButton in RemoveButtons) removeButton.Render();
         
         const int fontSize = 48;
-        Raylib.DrawText("Camera Offset", Raylib.GetScreenWidth() / 2 - Raylib.MeasureText("Camera Offset", fontSize) / 2,
+        Raylib.DrawText("Pozycja Kamery", Raylib.GetScreenWidth() / 2 - Raylib.MeasureText("Pozycja Kamery", fontSize) / 2,
             Raylib.GetScreenHeight() / 2 - 180, fontSize, Color.ORANGE);
-        Raylib.DrawText("Background Color", Raylib.GetScreenWidth() / 2 - Raylib.MeasureText("Background Color", fontSize) / 2,
+        Raylib.DrawText("Kolor tla", Raylib.GetScreenWidth() / 2 - Raylib.MeasureText("Kolor tla", fontSize) / 2,
             Raylib.GetScreenHeight() / 2 + 35, fontSize, Color.ORANGE);
-        Raylib.DrawText("Camera Boundaries", Raylib.GetScreenWidth() / 2 - Raylib.MeasureText("Camera Boundaries", fontSize) / 2,
+        Raylib.DrawText("Granice Kamery", Raylib.GetScreenWidth() / 2 - Raylib.MeasureText("Granice Kamery", fontSize) / 2,
             Raylib.GetScreenHeight() / 2 - 420, fontSize, Color.ORANGE);
-        Raylib.DrawText("Difficulty Modifier", Raylib.GetScreenWidth() / 2 - Raylib.MeasureText("Difficulty Modifier", fontSize) / 2,
+        Raylib.DrawText("Trudnosc", Raylib.GetScreenWidth() / 2 - Raylib.MeasureText("Trudnosc", fontSize) / 2,
             Raylib.GetScreenHeight() / 2 + 230, fontSize, Color.ORANGE);
     }
 }
@@ -295,7 +294,7 @@ public static class CoinsMenu
     {
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_Y)) MenuRectEnabled = !MenuRectEnabled;
         float mouseScroll = Raylib.GetMouseWheelMove();
-        _offset += mouseScroll * 25;
+        _offset += mouseScroll * 30;
         if (_offset > 0) _offset = 0;
     }
 
